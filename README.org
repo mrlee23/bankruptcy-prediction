@@ -1,5 +1,60 @@
-#+TITLE: 스페인 기업 파산 분석 및 예측
+#+OPTIONS: num:t
+#+TITLE: 스페인 기업 부도 분석 및 예측
 
 * 개요
-[[https://github.com/amorag/Bankruptcy_2016][Bankruptcy_2016]]의
-데이터를 이용하여 1998년부터 2003년까지 약 3000개의 기업에 대한 정보를 분석하고 파산 여부를 예측하는 것을 목표로 한다.
+이 프로젝트는 [[https://github.com/amorag/Bankruptcy_2016][Bankruptcy_2016]]의
+데이터를 이용하여 1998년부터 2003년까지 약 3000개의 기업에 대한 정보를 분석하고 부도 여부를 예측하는 것을 목표로 한다.
+
+* 목적과 목표
+기업별 재무재표와 상태 정보등을 이용한 분석을 통해 기업 부도에 영향을 미치는 변수들을 선택하고 모수들을 추정해 적합한 통계적 모델을 찾는 것을 목적으로 한다.
+이렇게 이끌어낸 통계적 모델을 이용해서 기업의 재무재표 및 상태 정보를 통해 부도 가능성을 예측하는 것을 목표로 한다.
+
+* 데이터 개요
+스페인 소재의 기업을 대상으로 부도 여부를 조사한 1998년 ~ 2003년 까지의 데이터이다.
+
+총 34개의 변수가 있으며 총 8개의 질적변수와 26개의 양적변수가 있다.
+2859의 데이터가 있고 이중 NA 값을 제외한 데이터수는 2385개 이다.
+데이터 분석시에는 NA 값을 제외한 2385개의 데이터를 이용할 것이다.
+
+원본 데이터셋의 데이터 개요는 [[../datasets/bankruptcy-datasets.arff][bankruptcy-datasets.arff]] 참조할 것.
+** 질적 변수
+| 변수 이름        | 타입                               | 설명                                   |
+|------------------+------------------------------------+----------------------------------------|
+| SIZE             | small, medium, big                 |                                        |
+| SOCIAL_CODE      | Co, Ltd, other                     | SOCIAL CODE OF THE COMPANY             |
+| LINKED_GROUP     | no, yes                            | LINKED TO A GROUP                      |
+| PROVINCE_CODE    | 1..52(4,5,19,34,42,44,51 제외)     | CODE OF PROVINCE                       |
+| DELAY_ACCOUNTS   | no, yes                            | DELAY (IN SENDING ITS ANNUAL ACCOUNTS) |
+| AUDITED          | no, yes                            | AUDITED                                |
+| AUDITORS_OPINION | nothing, positive, minor, negative | OPINION OF THE AUDITORY                |
+| BANKRUPTCY       | NO, YES                            | FINANCIAL FAILURE                      |
+
+** 양적 변수
+| 변수 이름                        | 타입    | 설명 |
+|----------------------------------+---------+-----|
+| YEAR                             | integer | FISCAL YEAR                                                 |
+| NUMBER_EMPLOYEES                 | integer | NUMBER OF EMPLOYEES                                         |
+| AGE                              | integer | AGE                                                         |
+| NUMBER_PARTNERS                  | integer | NUMBER OF PARTNERS                                          |
+| CHANGES_LOCATION                 | integer | NUMBER OF CHANGES OF LOCATION                               |
+| DEBT_STRUCTURE                   | numeric | DEBT STRUCTURE                                              |
+| DEBT_COST                        | numeric | DEBT COST                                                   |
+| DEBT_PAYING_AVAILABILITY         | numeric | DEBT PAYING AVAILABILITY                                    |
+| DEBT_RATIO                       | numeric | DEBT RATIO                                                  |
+| WORKING_CAPITAL                  | numeric | WORKING CAPITAL                                             |
+| WARRANTY                         | numeric | WARRANTY                                                    |
+| OPERATING_INCOME_MARGIN          | numeric | OPERATING INCOME MARGIN                                     |
+| RETURN_OPERATING_ASSETS          | numeric | RETURN ON OPERATING ASSETS                                  |
+| RETURN_EQUITY                    | numeric | RETURN ON EQUITY                                            |
+| RETURN_ASSETS                    | numeric | RETURN ON ASSETS                                            |
+| STOCK_TURNOVER                   | numeric | STOCK TURNOVER                                              |
+| ASSET_TURNOVER                   | numeric | ASSET TURNOVER                                              |
+| RECEIVABLE_TURNOVER              | numeric | RECEIVABLE TURNOVER                                         |
+| ASSET_ROTATION                   | numeric | ASSET ROTATION                                              |
+| FINANCIAL_SOLVENCY               | numeric | FINANCIAL SOLVENCY (CURRENT RATIO)                          |
+| ACID_TEST                        | numeric | ACID TEST                                                   |
+| NUMBER_JUDICIAL_INCIDENCES_TOTAL | integer | HISTORIC NUMBER OF JUDICIAL INCIDENCES                      |
+| NUMBER_JUDICIAL_INCIDENCES_YEAR  | integer | NUMBER OF JUDICIAL INCIDENCES (LAST YEAR)                   |
+| SPENT_JUDICIAL_INCIDENCES_TOTAL  | numeric | HISTORIC AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES       |
+| SPENT_JUDICIAL_INCIDENCES_YEAR   | numeric | AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES (LAST YEAR)    |
+| NUMBER_SERIOUS_INCIDENCES        | integer | HISTORIC NUMBER OF SERIOUS INCIDENCES                       |
