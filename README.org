@@ -58,3 +58,75 @@
 | SPENT_JUDICIAL_INCIDENCES_TOTAL  | numeric | HISTORIC AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES       |
 | SPENT_JUDICIAL_INCIDENCES_YEAR   | numeric | AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES (LAST YEAR)    |
 | NUMBER_SERIOUS_INCIDENCES        | integer | HISTORIC NUMBER OF SERIOUS INCIDENCES                       |
+
+* 분석 과정
+
+** 로지스틱 회귀분석
+#+NAME: sample
+  #+BEGIN_SRC R :results output :eval never-export :exports both
+source(file="sample.R")
+  #+END_SRC
+
+  #+RESULTS: sample
+  #+begin_example
+
+  Call:
+  glm(formula = BANKRUPTCY ~ ., family = binomial, data = data)
+
+  Deviance Residuals: 
+	  Min       1Q   Median       3Q      Max  
+  -1.8990  -0.1323  -0.0600  -0.0248   3.5681  
+
+  Coefficients:
+									 Estimate Std. Error z value Pr(>|z|)    
+  (Intercept)                      -1.264e+03  2.890e+02  -4.376 1.21e-05 ***
+  YEAR                              6.319e-01  1.444e-01   4.375 1.22e-05 ***
+  SIZEmedium                       -2.414e+00  7.689e-01  -3.139  0.00169 ** 
+  SIZEsmall                        -2.757e+00  8.409e-01  -3.279  0.00104 ** 
+  NUMBER_EMPLOYEES                 -1.247e-03  1.276e-03  -0.977  0.32866    
+  AGE                               1.732e-02  1.215e-02   1.426  0.15394    
+  SOCIAL_CODELtd                   -7.805e-01  4.657e-01  -1.676  0.09378 .  
+  SOCIAL_CODEother                 -1.511e+01  1.513e+03  -0.010  0.99203    
+  LINKED_GROUPyes                  -1.694e+01  9.718e+02  -0.017  0.98609    
+  NUMBER_PARTNERS                  -4.220e-02  2.444e-02  -1.727  0.08421 .  
+  PROVINCE_CODE                    -3.997e-02  1.472e-02  -2.715  0.00663 ** 
+  CHANGES_LOCATION                  9.020e-02  1.497e-01   0.602  0.54688    
+  DEBT_STRUCTURE                    3.941e-02  6.966e-02   0.566  0.57153    
+  DEBT_COST                        -2.235e-01  9.339e-02  -2.393  0.01671 *  
+  DEBT_PAYING_AVAILABILITY          5.957e-02  1.853e-01   0.321  0.74786    
+  DEBT_RATIO                       -2.292e-05  3.244e-04  -0.071  0.94366    
+  WORKING_CAPITAL                  -1.275e-01  1.914e-01  -0.666  0.50520    
+  WARRANTY                         -3.573e-03  1.820e-02  -0.196  0.84436    
+  OPERATING_INCOME_MARGIN          -2.993e-05  7.986e-05  -0.375  0.70783    
+  RETURN_OPERATING_ASSETS           1.436e-07  2.402e-05   0.006  0.99523    
+  RETURN_EQUITY                    -5.433e-06  1.073e-05  -0.506  0.61254    
+  RETURN_ASSETS                    -2.628e-02  1.731e-02  -1.518  0.12890    
+  STOCK_TURNOVER                    2.215e-03  1.678e-02   0.132  0.89497    
+  ASSET_TURNOVER                   -5.921e-01  2.390e-01  -2.478  0.01321 *  
+  RECEIVABLE_TURNOVER              -2.320e-03  3.533e-03  -0.657  0.51135    
+  ASSET_ROTATION                   -8.076e-06  1.211e-04  -0.067  0.94683    
+  FINANCIAL_SOLVENCY                5.609e-02  1.123e-01   0.500  0.61738    
+  ACID_TEST                        -6.635e-02  1.218e-01  -0.545  0.58592    
+  DELAY_ACCOUNTSyes                 8.448e-02  6.038e-01   0.140  0.88872    
+  NUMBER_JUDICIAL_INCIDENCES_TOTAL  3.961e-01  5.453e-01   0.726  0.46761    
+  NUMBER_JUDICIAL_INCIDENCES_YEAR   1.777e+00  8.502e-01   2.090  0.03661 *  
+  SPENT_JUDICIAL_INCIDENCES_TOTAL   3.638e-07  1.588e-05   0.023  0.98173    
+  SPENT_JUDICIAL_INCIDENCES_YEAR    9.992e-07  1.739e-05   0.057  0.95417    
+  NUMBER_SERIOUS_INCIDENCES         5.213e-01  1.074e+00   0.485  0.62747    
+  AUDITEDyes                        1.594e+00  4.935e-01   3.231  0.00123 ** 
+  AUDITORS_OPINIONnegative         -1.627e+01  7.066e+03  -0.002  0.99816    
+  AUDITORS_OPINIONnothing          -3.316e-01  5.900e-01  -0.562  0.57403    
+  AUDITORS_OPINIONpositive         -1.177e+00  7.804e-01  -1.508  0.13164    
+  ---
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+  (Dispersion parameter for binomial family taken to be 1)
+
+	  Null deviance: 485.44  on 2384  degrees of freedom
+  Residual deviance: 288.32  on 2347  degrees of freedom
+  AIC: 364.32
+
+  Number of Fisher Scoring iterations: 18
+
+#+end_example
+
