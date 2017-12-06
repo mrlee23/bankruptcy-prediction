@@ -61,9 +61,12 @@
 
 * 분석 과정
 
+기업 부도 요인을 분석하는 것이 목적이기 때문에 반응변수로 *BANKRUPTCY* 를 사용한다.
+*BANKRUPTCY* 는 질적변수로 YES(부도), NO(부도X)로 부도 여부를 나타내는 변수이다.
+
 ** 로지스틱 회귀분석
 #+NAME: sample
-  #+BEGIN_SRC R :results output :eval never-export :exports both
+  #+BEGIN_SRC R :results output :eval never-export :exports results
 source(file="sample.R")
   #+END_SRC
 
