@@ -10,6 +10,13 @@ extract.data <- function (data, columns) {
     data = data[complete.cases(data),]
     return (data)
 }
+remove.noise <- function (data, colname, match) {
+    matched = which(data[[colname]] == match)
+    if (length(matched) > 0) {
+        data = data[-matched,]
+    }
+    return(data)
+}
 convert.data <- function (data, columns) {
     tmp = data[,(names(data) %in% columns)]
     data = extract.data(data, columns)
@@ -24,5 +31,8 @@ convert.data <- function (data, columns) {
     }
     return (data)
 }
+print(dim(data))
 data = extract.data(data, c("YEAR","SOCIAL_CODE","PROVINCE_CODE"))
+data = remove.noise(data, "AGE", -1)
 data = convert.data(data, c("BANKRUPTCY", "DELAY_ACCOUNTS", "LINKED_GROUP", "AUDITED"))
+print(dim(data))
