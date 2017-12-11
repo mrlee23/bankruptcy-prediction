@@ -21,43 +21,43 @@
 | 변수 이름        | 타입                               | 설명                                   |
 |------------------+------------------------------------+----------------------------------------|
 | SIZE             | small, medium, big                 |                                        |
-| SOCIAL_CODE      | Co, Ltd, other                     | SOCIAL CODE OF THE COMPANY             |
-| LINKED_GROUP     | no, yes                            | LINKED TO A GROUP                      |
-| PROVINCE_CODE    | 1..52(4,5,19,34,42,44,51 제외)     | CODE OF PROVINCE                       |
+| SOCIAL_CODE      | Co, Ltd, other                     | 기업 형태                              |
+| LINKED_GROUP     | no, yes                            | 그룹 여부                              |
+| PROVINCE_CODE    | 1..52(4,5,19,34,42,44,51 제외)     | 지방 코드                              |
 | DELAY_ACCOUNTS   | no, yes                            | DELAY (IN SENDING ITS ANNUAL ACCOUNTS) |
-| AUDITED          | no, yes                            | AUDITED                                |
-| AUDITORS_OPINION | nothing, positive, minor, negative | OPINION OF THE AUDITORY                |
-| BANKRUPTCY       | NO, YES                            | FINANCIAL FAILURE                      |
+| AUDITED          | no, yes                            | 감사 여부                          |
+| AUDITORS_OPINION | nothing, positive, minor, negative | 감사원 의견               |
+| BANKRUPTCY       | NO, YES                            | 부도 여부ㅉ                    |
 
 ** 양적 변수
-| 변수 이름                        | 타입    | 설명 |
-|----------------------------------+---------+-----|
-| YEAR                             | integer | FISCAL YEAR                                                 |
-| NUMBER_EMPLOYEES                 | integer | NUMBER OF EMPLOYEES                                         |
-| AGE                              | integer | AGE                                                         |
-| NUMBER_PARTNERS                  | integer | NUMBER OF PARTNERS                                          |
-| CHANGES_LOCATION                 | integer | NUMBER OF CHANGES OF LOCATION                               |
-| DEBT_STRUCTURE                   | numeric | DEBT STRUCTURE                                              |
-| DEBT_COST                        | numeric | DEBT COST                                                   |
-| DEBT_PAYING_AVAILABILITY         | numeric | DEBT PAYING AVAILABILITY                                    |
-| DEBT_RATIO                       | numeric | DEBT RATIO                                                  |
-| WORKING_CAPITAL                  | numeric | WORKING CAPITAL                                             |
-| WARRANTY                         | numeric | WARRANTY                                                    |
-| OPERATING_INCOME_MARGIN          | numeric | OPERATING INCOME MARGIN                                     |
-| RETURN_OPERATING_ASSETS          | numeric | RETURN ON OPERATING ASSETS                                  |
-| RETURN_EQUITY                    | numeric | RETURN ON EQUITY                                            |
-| RETURN_ASSETS                    | numeric | RETURN ON ASSETS                                            |
-| STOCK_TURNOVER                   | numeric | STOCK TURNOVER                                              |
-| ASSET_TURNOVER                   | numeric | ASSET TURNOVER                                              |
-| RECEIVABLE_TURNOVER              | numeric | RECEIVABLE TURNOVER                                         |
-| ASSET_ROTATION                   | numeric | ASSET ROTATION                                              |
-| FINANCIAL_SOLVENCY               | numeric | FINANCIAL SOLVENCY (CURRENT RATIO)                          |
-| ACID_TEST                        | numeric | ACID TEST                                                   |
-| NUMBER_JUDICIAL_INCIDENCES_TOTAL | integer | HISTORIC NUMBER OF JUDICIAL INCIDENCES                      |
-| NUMBER_JUDICIAL_INCIDENCES_YEAR  | integer | NUMBER OF JUDICIAL INCIDENCES (LAST YEAR)                   |
-| SPENT_JUDICIAL_INCIDENCES_TOTAL  | numeric | HISTORIC AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES       |
-| SPENT_JUDICIAL_INCIDENCES_YEAR   | numeric | AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES (LAST YEAR)    |
-| NUMBER_SERIOUS_INCIDENCES        | integer | HISTORIC NUMBER OF SERIOUS INCIDENCES                       |
+| 변수 이름                        | 범위                 | 설명                   |
+|----------------------------------+----------------------+------------------------|
+| YEAR                             | 1998 ~ 2003          | 기록 연도              |
+| NUMBER_EMPLOYEES                 | 0 ~ 2662             | 직원 수                |
+| AGE                              | 0 ~ 85               | 기업 연수              |
+| NUMBER_PARTNERS                  | 0 ~ 75               | 협력 기업 수           |
+| CHANGES_LOCATION                 | 0 ~ 8                | 기업 위치 변경 수      |
+| DEBT_STRUCTURE                   | -99.07 ~ 134.48      | 부채 구조              |
+| DEBT_COST                        | -0.87 ~ 8151.25      | 부채 비용              |
+| DEBT_PAYING_AVAILABILITY         | -7.27 ~ 345.05       | 부채 지불 능력         |
+| DEBT_RATIO                       | -43094.47 ~ 17570.04 | 부채 비율              |
+| WORKING_CAPITAL                  | -14.92 ~ 24.23       | 순운전(운영)자본       |
+| WARRANTY                         | -526.22 ~ 46836.93   | WARRANTY               |
+| OPERATING_INCOME_MARGIN          | -45180.9 ~ 8791.51   | 영업이익률             |
+| RETURN_OPERATING_ASSETS          | -68775792 ~ 2885.159 | 운용자산순환률         |
+| RETURN_EQUITY                    | -1825426 ~ 9349.018  | 자기자본이익률         |
+| RETURN_ASSETS                    | -481.07 ~ 711.22     | 총자산순이익률         |
+| STOCK_TURNOVER                   | -481.08 ~ 711.22     | 자본금회전율           |
+| ASSET_TURNOVER                   | -0.33 ~ 112.28       | 자산회전율             |
+| RECEIVABLE_TURNOVER              | -905.96 ~ 17096.96   | 매출채권 회전율        |
+| ASSET_ROTATION                   | -60947.59 ~ 90619.69 | 자본순환율             |
+| FINANCIAL_SOLVENCY               | -343.43 ~ 5481.22    | 재무건전성             |
+| ACID_TEST                        | -315.79 ~ 5268.60    | 당좌 비율              |
+| NUMBER_JUDICIAL_INCIDENCES_TOTAL | 0 ~ 5                | 법적 분쟁 발생 수      |
+| NUMBER_JUDICIAL_INCIDENCES_YEAR  | 0 ~ 1                | 최근 1년간 법적 분쟁 발생 수 |
+| SPENT_JUDICIAL_INCIDENCES_TOTAL  | 0 ~ 448342.4         | 법적 분쟁 부담 비용    |
+| SPENT_JUDICIAL_INCIDENCES_YEAR   | 0 ~ 445476.7         | 최근 1년간 법적 부쟁 부담 비용 |
+| NUMBER_SERIOUS_INCIDENCES        | 0 ~ 1                | 위험 사고 발생 수      |
 
 * 분석 과정
 
@@ -88,6 +88,7 @@ source(file="sample.R")
 ** 변수 선택
 
 *** Subset Selection
+
 
 *** Shrinkage Methods(Ridge, Lasso)
 #+NAME: ridge
