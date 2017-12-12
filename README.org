@@ -207,7 +207,7 @@ source(file="logistic.R")
 
 p-value가 0.01미만으로 약간 유의하게 나온 변수는 =ASSET_TURNOVER=, =NUMBER_JUDICIAL_INCIDENCES_YEAR= 등이다.
 
-[[./logistic.png]]
+[[./plots/logistic.png]]
 
 기준점을 0.01로 잡을 때는 에러율이 30%였다가 0.05로 잡으면 7%, 0.1로 잡으면 3%로 줄며, 0.2는 2.3%, 0.5는 2.1%로 주는 폭이 크게 주는것을 볼 수 있다.
 
@@ -235,7 +235,7 @@ source(file="variable-selection.R")
 	 #+END_SRC
 
 **** subset(nvmax=31)
-[[./subset.png]]
+[[./plots/subset.png]]
 
 | C_p                             | BIC                             | Ajr^2                           |
 |---------------------------------+---------------------------------+---------------------------------|
@@ -260,7 +260,7 @@ source(file="variable-selection.R")
 C_p는 Ajr^2 에있는 NUMBER_PARTNERS가 없다.
 
 **** forward
-[[./forward.png]]
+[[./plots/forward.png]]
 
 | C_p                             | BIC                             | Ajr^2                           |
 |---------------------------------+---------------------------------+---------------------------------|
@@ -284,7 +284,7 @@ C_p는 Ajr^2 에있는 NUMBER_PARTNERS가 없다.
 | 15                              | 9                               | 16                              |
 
 **** backward
-[[./backward.png]]
+[[./plots/backward.png]]
 | C_p                             | BIC                             | Ajr^2                           |
 |---------------------------------+---------------------------------+---------------------------------|
 | SIZEmedium                      | SIZEmedium                      | SIZEmedium                      |
