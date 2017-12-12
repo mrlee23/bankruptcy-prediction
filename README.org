@@ -64,6 +64,15 @@
 기업 부도 요인을 분석하는 것이 목적이기 때문에 반응변수로 *BANKRUPTCY* 를 사용한다.
 *BANKRUPTCY* 는 질적변수로 YES(부도), NO(부도X)로 부도 여부를 나타내는 변수이다.
 
+** 변수 분석
+[[./plots/scatters/scatter-1(12).jpg]]
+
+[[./plots/scatters/scatter-2(11).jpg]]
+
+[[./plots/scatters/scatter-3(7).jpg]]
+
+[[./plots/scatters/scatter-all.jpg]]
+
 ** 분류
 *** Logistic Regression
 #+NAME: sample
