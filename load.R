@@ -29,6 +29,6 @@ convert.data <- function (data, columns) {
 print(dim(data))
 data = extract.data(data, c("YEAR","SOCIAL_CODE","PROVINCE_CODE"))
 data = remove.noise(data, "AGE", -1)
-data = convert.data(data, c("DELAY_ACCOUNTS", "LINKED_GROUP", "AUDITED"))
-## data = convert.data(data, c("BANKRUPTCY"))
+data = convert.data(data, c("DELAY_ACCOUNTS", "LINKED_GROUP", "AUDITED", "AUDITORS_OPINION"))
+data = convert.data(data, c("BANKRUPTCY"))
 print(dim(data))
