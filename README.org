@@ -234,149 +234,71 @@ p-value가 0.01미만으로 약간 유의하게 나온 변수는 =ASSET_TURNOVER
 source(file="variable-selection.R")
 	 #+END_SRC
 
-  #+RESULTS: subset
-  #+begin_example
-  [1] "Subset"
-  [1] "C_p"
-  [1] 15
-					  (Intercept)                      SIZEmedium 
-					 1.099424e+00                   -1.013674e-01 
-						SIZEsmall                NUMBER_EMPLOYEES 
-					-9.441615e-02                   -5.553358e-05 
-							  AGE                       DEBT_COST 
-					 5.804698e-04                    6.045425e-05 
-				  WORKING_CAPITAL                   RETURN_EQUITY 
-					-5.938758e-03                   -5.173920e-07 
-					RETURN_ASSETS                  ASSET_TURNOVER 
-					-6.997203e-04                   -1.810321e-03 
-  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
-					 1.057587e-01                    1.389058e-06 
-		NUMBER_SERIOUS_INCIDENCES        AUDITORS_OPINIONpositive 
-					-3.754848e-02                   -1.809547e-02 
-					 LINKED_GROUP                         AUDITED 
-					-4.088631e-02                    3.563019e-02 
-  [1] "BIC"
-  [1] 8
-					  (Intercept)                      SIZEmedium 
-					 1.067797e+00                   -7.231181e-02 
-						SIZEsmall                       DEBT_COST 
-					-6.134645e-02                    6.660574e-05 
-					RETURN_EQUITY                   RETURN_ASSETS 
-					-5.222434e-07                   -7.952889e-04 
-  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
-					 1.011653e-01                    1.314959e-06 
-						  AUDITED 
-					 3.401960e-02 
-  [1] "Ajr^2"
-  [1] 16
-					  (Intercept)                      SIZEmedium 
-					 1.109480e+00                   -1.077697e-01 
-						SIZEsmall                NUMBER_EMPLOYEES 
-					-1.025763e-01                   -5.030466e-05 
-							  AGE                 NUMBER_PARTNERS 
-					 5.835440e-04                   -5.142603e-04 
-						DEBT_COST                 WORKING_CAPITAL 
-					 6.123117e-05                   -5.726939e-03 
-					RETURN_EQUITY                   RETURN_ASSETS 
-					-5.183379e-07                   -7.108301e-04 
-				   ASSET_TURNOVER NUMBER_JUDICIAL_INCIDENCES_YEAR 
-					-1.820269e-03                    1.061103e-01 
-  SPENT_JUDICIAL_INCIDENCES_TOTAL       NUMBER_SERIOUS_INCIDENCES 
-					 1.393146e-06                   -3.839968e-02 
-		 AUDITORS_OPINIONpositive                    LINKED_GROUP 
-					-1.873016e-02                   -4.036312e-02 
-						  AUDITED 
-					 3.825724e-02 
-  [1] "Forward"
-  [1] "C_p"
-  [1] 15
-					  (Intercept)                      SIZEmedium 
-					 1.099424e+00                   -1.013674e-01 
-						SIZEsmall                NUMBER_EMPLOYEES 
-					-9.441615e-02                   -5.553358e-05 
-							  AGE                       DEBT_COST 
-					 5.804698e-04                    6.045425e-05 
-				  WORKING_CAPITAL                   RETURN_EQUITY 
-					-5.938758e-03                   -5.173920e-07 
-					RETURN_ASSETS                  ASSET_TURNOVER 
-					-6.997203e-04                   -1.810321e-03 
-  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
-					 1.057587e-01                    1.389058e-06 
-		NUMBER_SERIOUS_INCIDENCES        AUDITORS_OPINIONpositive 
-					-3.754848e-02                   -1.809547e-02 
-					 LINKED_GROUP                         AUDITED 
-					-4.088631e-02                    3.563019e-02 
-  [1] "BIC"
-  [1] 9
-					  (Intercept)                      SIZEmedium 
-					 1.059610e+00                   -7.215902e-02 
-						SIZEsmall                             AGE 
-					-5.997861e-02                    5.933760e-04 
-						DEBT_COST                   RETURN_EQUITY 
-					 6.575630e-05                   -5.217266e-07 
-					RETURN_ASSETS NUMBER_JUDICIAL_INCIDENCES_YEAR 
-					-7.787640e-04                    1.039189e-01 
-  SPENT_JUDICIAL_INCIDENCES_TOTAL                         AUDITED 
-					 1.308219e-06                    3.058008e-02 
-  [1] "Ajr^2"
-  [1] 16
-					  (Intercept)                      SIZEmedium 
-					 1.109480e+00                   -1.077697e-01 
-						SIZEsmall                NUMBER_EMPLOYEES 
-					-1.025763e-01                   -5.030466e-05 
-							  AGE                 NUMBER_PARTNERS 
-					 5.835440e-04                   -5.142603e-04 
-						DEBT_COST                 WORKING_CAPITAL 
-					 6.123117e-05                   -5.726939e-03 
-					RETURN_EQUITY                   RETURN_ASSETS 
-					-5.183379e-07                   -7.108301e-04 
-				   ASSET_TURNOVER NUMBER_JUDICIAL_INCIDENCES_YEAR 
-					-1.820269e-03                    1.061103e-01 
-  SPENT_JUDICIAL_INCIDENCES_TOTAL       NUMBER_SERIOUS_INCIDENCES 
-					 1.393146e-06                   -3.839968e-02 
-		 AUDITORS_OPINIONpositive                    LINKED_GROUP 
-					-1.873016e-02                   -4.036312e-02 
-						  AUDITED 
-					 3.825724e-02 
-  [1] "Backward"
-  [1] "C_p"
-  [1] 8
-					  (Intercept)                      SIZEmedium 
-					 1.067797e+00                   -7.231181e-02 
-						SIZEsmall                       DEBT_COST 
-					-6.134645e-02                    6.660574e-05 
-					RETURN_EQUITY                   RETURN_ASSETS 
-					-5.222434e-07                   -7.952889e-04 
-  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
-					 1.011653e-01                    1.314959e-06 
-						  AUDITED 
-					 3.401960e-02 
-  [1] "BIC"
-  [1] 8
-					  (Intercept)                      SIZEmedium 
-					 1.067797e+00                   -7.231181e-02 
-						SIZEsmall                       DEBT_COST 
-					-6.134645e-02                    6.660574e-05 
-					RETURN_EQUITY                   RETURN_ASSETS 
-					-5.222434e-07                   -7.952889e-04 
-  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
-					 1.011653e-01                    1.314959e-06 
-						  AUDITED 
-					 3.401960e-02 
-  [1] "Ajr^2"
-  [1] 8
-					  (Intercept)                      SIZEmedium 
-					 1.067797e+00                   -7.231181e-02 
-						SIZEsmall                       DEBT_COST 
-					-6.134645e-02                    6.660574e-05 
-					RETURN_EQUITY                   RETURN_ASSETS 
-					-5.222434e-07                   -7.952889e-04 
-  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
-					 1.011653e-01                    1.314959e-06 
-						  AUDITED 
-					 3.401960e-02 
-#+end_example
+**** subset(nvmax=31)
+[[./subset.png]]
 
+| C_p                             | BIC                             | Ajr^2                           |
+|---------------------------------+---------------------------------+---------------------------------|
+| SIZEmedium                      | SIZEmedium                      | SIZEmedium                      |
+| SIZEsmall                       | SIZEsmall                       | SIZEsmall                       |
+| NUMBER_EMPLOYEES                | DEBT_COST                       | NUMBER_EMPLOYEES                |
+| AGE                             | RETURN_EQUITY                   | AGE                             |
+| DEBT_COST                       | RETURN_ASSETS                   | NUMBER_PARTNERS                 |
+| WORKING_CAPITAL                 | NUMBER_JUDICIAL_INCIDENCES_YEAR | DEBT_COST                       |
+| RETURN_EQUITY                   | SPENT_JUDICIAL_INCIDENCES_TOTAL | WORKING_CAPITAL                 |
+| RETURN_ASSETS                   | AUDITED                         | RETURN_EQUITY                   |
+| ASSET_TURNOVER                  |                                 | RETURN_ASSETS                   |
+| NUMBER_JUDICIAL_INCIDENCES_YEAR |                                 | ASSET_TURNOVER                  |
+| SPENT_JUDICIAL_INCIDENCES_TOTAL |                                 | NUMBER_JUDICIAL_INCIDENCES_YEAR |
+| NUMBER_SERIOUS_INCIDENCES       |                                 | SPENT_JUDICIAL_INCIDENCES_TOTAL |
+| AUDITORS_OPINIONpositive        |                                 | NUMBER_SERIOUS_INCIDENCES       |
+| LINKED_GROUP                    |                                 | AUDITORS_OPINIONpositive        |
+| AUDITED                         |                                 | LINKED_GROUP                    |
+|                                 |                                 | AUDITED                         |
+|---------------------------------+---------------------------------+---------------------------------|
+| 15                              | 8                               | 16                              |
+C_p는 Ajr^2 에있는 NUMBER_PARTNERS가 없다.
+
+**** forward
+[[./forward.png]]
+
+| C_p                             | BIC                             | Ajr^2                           |
+|---------------------------------+---------------------------------+---------------------------------|
+| SIZEmedium                      | SIZEmedium                      | SIZEmedium                      |
+| SIZEsmall                       | SIZEsmall                       | SIZEsmall                       |
+| NUMBER_EMPLOYEES                | AGE                             | NUMBER_EMPLOYEES                |
+| AGE                             | DEBT_COST                       | AGE                             |
+| DEBT_COST                       | RETURN_EQUITY                   | NUMBER_PARTNERS                 |
+| WORKING_CAPITAL                 | RETURN_ASSETS                   | DEBT_COST                       |
+| RETURN_EQUITY                   | NUMBER_JUDICIAL_INCIDENCES_YEAR | WORKING_CAPITAL                 |
+| RETURN_ASSETS                   | SPENT_JUDICIAL_INCIDENCES_TOTAL | RETURN_EQUITY                   |
+| ASSET_TURNOVER                  | AUDITED                         | RETURN_ASSETS                   |
+| NUMBER_JUDICIAL_INCIDENCES_YEAR |                                 | ASSET_TURNOVER                  |
+| SPENT_JUDICIAL_INCIDENCES_TOTAL |                                 | NUMBER_JUDICIAL_INCIDENCES_YEAR |
+| NUMBER_SERIOUS_INCIDENCES       |                                 | SPENT_JUDICIAL_INCIDENCES_TOTAL |
+| AUDITORS_OPINIONpositive        |                                 | NUMBER_SERIOUS_INCIDENCES       |
+| LINKED_GROUP                    |                                 | AUDITORS_OPINIONpositive        |
+| AUDITED                         |                                 | LINKED_GROUP                    |
+|                                 |                                 | AUDITED                         |
+|---------------------------------+---------------------------------+---------------------------------|
+| 15                              | 9                               | 16                              |
+
+**** backward
+[[./backward.png]]
+| C_p                             | BIC                             | Ajr^2                           |
+|---------------------------------+---------------------------------+---------------------------------|
+| SIZEmedium                      | SIZEmedium                      | SIZEmedium                      |
+| SIZEsmall                       | SIZEsmall                       | SIZEsmall                       |
+| DEBT_COST                       | DEBT_COST                       | DEBT_COST                       |
+| RETURN_EQUITY                   | RETURN_EQUITY                   | RETURN_EQUITY                   |
+| RETURN_ASSETS                   | RETURN_ASSETS                   | RETURN_ASSETS                   |
+| NUMBER_JUDICIAL_INCIDENCES_YEAR | NUMBER_JUDICIAL_INCIDENCES_YEAR | NUMBER_JUDICIAL_INCIDENCES_YEAR |
+| SPENT_JUDICIAL_INCIDENCES_TOTAL | SPENT_JUDICIAL_INCIDENCES_TOTAL | SPENT_JUDICIAL_INCIDENCES_TOTAL |
+| AUDITED                         | AUDITED                         | AUDITED                         |
+|---------------------------------+---------------------------------+---------------------------------|
+| 8                               | 8                               | 8                               |
+
+세가지 모두 동일한 변수를 선택하였다.
 
 *** Shrinkage Methods(Ridge, Lasso)
 #+NAME: ridge

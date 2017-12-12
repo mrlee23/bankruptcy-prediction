@@ -48,15 +48,15 @@ regfit.fwd <- regsubsets(BANKRUPTCY ~ . , data=data, method="forward")
 regfit.bwd <- regsubsets(BANKRUPTCY ~ . , data=data, method="backward")
 summary(regfit.full)
 plot.gen(regfit.full, './plots/subset.png')
+
 regfit.full <- subset.simple(data, 'full')
 regfit.fwd <- subset.simple(data, 'forward')
 regfix.bwd <- subset.simple(data, 'backward')
+plot.gen(regfit.fwd, './plots/forward.png')
+plot.gen(regfit.bwd, './plots/backward.png')
 ## print(summary(regfit.full))
 
 
-print("Subset")
 coef.print(regfit.full)
-print("Forward")
 coef.print(regfit.fwd)
-print("Backward")
 coef.print(regfit.bwd)
