@@ -1,8 +1,3 @@
-## install.packages('glmnet')
-## install.packages('elasticnet')
-library(glmnet)
-library(elasticnet)
-
 data = read.csv('./datasets/bankruptcy-datasets.csv', header=TRUE, row.names=NULL, sep = ";")
 dim(data)
 extract.data <- function (data, columns) {
@@ -34,5 +29,5 @@ convert.data <- function (data, columns) {
 print(dim(data))
 data = extract.data(data, c("YEAR","SOCIAL_CODE","PROVINCE_CODE"))
 data = remove.noise(data, "AGE", -1)
-data = convert.data(data, c("BANKRUPTCY", "DELAY_ACCOUNTS", "LINKED_GROUP", "AUDITED"))
+data = convert.data(data, c("DELAY_ACCOUNTS", "LINKED_GROUP", "AUDITED"))
 print(dim(data))

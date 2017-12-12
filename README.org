@@ -45,8 +45,8 @@
 | WARRANTY                         | -526.22 ~ 46836.93   | WARRANTY               |
 | OPERATING_INCOME_MARGIN          | -45180.9 ~ 8791.51   | 영업이익률             |
 | RETURN_OPERATING_ASSETS          | -68775792 ~ 2885.159 | 운용자산순환률         |
-| RETURN_EQUITY                    | -1825426 ~ 9349.018  | 자기자본이익률         |
-| RETURN_ASSETS                    | -481.07 ~ 711.22     | 총자산순이익률         |
+| RETURN_EQUITY                    | -1825426 ~ 9349.018  | 자기자본이익률  |
+| RETURN_ASSETS                    | -481.07 ~ 711.22     | 총자산순이익률  |
 | STOCK_TURNOVER                   | -481.08 ~ 711.22     | 자본금회전율           |
 | ASSET_TURNOVER                   | -0.33 ~ 112.28       | 자산회전율             |
 | RECEIVABLE_TURNOVER              | -905.96 ~ 17096.96   | 매출채권 회전율        |
@@ -68,8 +68,148 @@
 *** Logistic Regression
 #+NAME: sample
   #+BEGIN_SRC R :results output :eval never-export :exports results
-source(file="sample.R")
+source(file="logistic.R")
   #+END_SRC
+
+  #+RESULTS: sample
+  #+begin_example
+  [1] 2859   34
+  [1] 2383   31
+
+  Call:
+  glm(formula = BANKRUPTCY ~ ., family = binomial, data = data)
+
+  Deviance Residuals: 
+	  Min       1Q   Median       3Q      Max  
+  -2.0452  -0.1666  -0.0917  -0.0525   3.3354  
+
+  Coefficients:
+									 Estimate Std. Error z value Pr(>|z|)    
+  (Intercept)                      -1.490e+00  1.067e+00  -1.396  0.16279    
+  SIZEmedium                       -1.879e+00  7.031e-01  -2.673  0.00753 ** 
+  SIZEsmall                        -2.025e+00  7.519e-01  -2.694  0.00707 ** 
+  NUMBER_EMPLOYEES                 -3.111e-04  8.785e-04  -0.354  0.72321    
+  AGE                               1.927e-02  1.026e-02   1.879  0.06029 .  
+  NUMBER_PARTNERS                  -4.587e-02  2.402e-02  -1.910  0.05613 .  
+  CHANGES_LOCATION                  2.742e-02  1.331e-01   0.206  0.83675    
+  DEBT_STRUCTURE                    7.573e-02  6.414e-02   1.181  0.23772    
+  DEBT_COST                        -2.754e-01  9.110e-02  -3.023  0.00251 ** 
+  DEBT_PAYING_AVAILABILITY          5.322e-02  2.106e-01   0.253  0.80053    
+  DEBT_RATIO                        2.196e-06  1.956e-04   0.011  0.99104    
+  WORKING_CAPITAL                  -2.097e-01  2.092e-01  -1.002  0.31636    
+  WARRANTY                          2.633e-03  1.843e-02   0.143  0.88639    
+  OPERATING_INCOME_MARGIN           1.056e-05  7.825e-05   0.135  0.89265    
+  RETURN_OPERATING_ASSETS           1.434e-07  2.012e-05   0.007  0.99431    
+  RETURN_EQUITY                    -5.661e-06  1.736e-05  -0.326  0.74439    
+  RETURN_ASSETS                    -1.948e-02  1.599e-02  -1.218  0.22311    
+  STOCK_TURNOVER                   -4.488e-03  1.562e-02  -0.287  0.77388    
+  ASSET_TURNOVER                   -5.722e-01  2.259e-01  -2.533  0.01131 *  
+  RECEIVABLE_TURNOVER              -1.897e-03  3.153e-03  -0.602  0.54737    
+  ASSET_ROTATION                   -2.151e-05  1.338e-04  -0.161  0.87231    
+  FINANCIAL_SOLVENCY                4.808e-02  7.200e-02   0.668  0.50429    
+  ACID_TEST                        -6.914e-02  8.750e-02  -0.790  0.42939    
+  NUMBER_JUDICIAL_INCIDENCES_TOTAL  2.588e-01  4.977e-01   0.520  0.60298    
+  NUMBER_JUDICIAL_INCIDENCES_YEAR   1.964e+00  7.766e-01   2.529  0.01144 *  
+  SPENT_JUDICIAL_INCIDENCES_TOTAL   1.417e-05  1.653e-05   0.857  0.39144    
+  SPENT_JUDICIAL_INCIDENCES_YEAR   -1.046e-05  1.800e-05  -0.582  0.56089    
+  NUMBER_SERIOUS_INCIDENCES         9.149e-02  9.474e-01   0.097  0.92307    
+  AUDITORS_OPINIONnegative         -1.600e+01  1.099e+04  -0.001  0.99884    
+  AUDITORS_OPINIONnothing          -3.828e-01  5.748e-01  -0.666  0.50535    
+  AUDITORS_OPINIONpositive         -7.730e-01  7.432e-01  -1.040  0.29833    
+  LINKED_GROUP                     -1.336e+02  1.105e+03  -0.121  0.90378    
+  DELAY_ACCOUNTS                    2.333e-01  5.734e-01   0.407  0.68405    
+  AUDITED                           1.849e+00  4.580e-01   4.037  5.4e-05 ***
+  ---
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+  (Dispersion parameter for binomial family taken to be 1)
+
+	  Null deviance: 485.35  on 2382  degrees of freedom
+  Residual deviance: 324.63  on 2349  degrees of freedom
+  AIC: 392.63
+
+  Number of Fisher Scoring iterations: 19
+
+										Estimate   Std. Error      z value
+  (Intercept)                      -1.489950e+00 1.067497e+00 -1.395741593
+  SIZEmedium                       -1.879181e+00 7.031311e-01 -2.672590190
+  SIZEsmall                        -2.025471e+00 7.519345e-01 -2.693679732
+  NUMBER_EMPLOYEES                 -3.111385e-04 8.784833e-04 -0.354176927
+  AGE                               1.926647e-02 1.025533e-02  1.878679796
+  NUMBER_PARTNERS                  -4.587306e-02 2.401656e-02 -1.910059763
+  CHANGES_LOCATION                  2.741593e-02 1.330531e-01  0.206052536
+  DEBT_STRUCTURE                    7.572742e-02 6.413813e-02  1.180692606
+  DEBT_COST                        -2.753826e-01 9.110474e-02 -3.022703000
+  DEBT_PAYING_AVAILABILITY          5.321810e-02 2.106303e-01  0.252661132
+  DEBT_RATIO                        2.195737e-06 1.955852e-04  0.011226502
+  WORKING_CAPITAL                  -2.096576e-01 2.092444e-01 -1.001974621
+  WARRANTY                          2.632570e-03 1.842508e-02  0.142879703
+  OPERATING_INCOME_MARGIN           1.055920e-05 7.824735e-05  0.134946451
+  RETURN_OPERATING_ASSETS           1.433722e-07 2.011593e-05  0.007127297
+  RETURN_EQUITY                    -5.661127e-06 1.736301e-05 -0.326045250
+  RETURN_ASSETS                    -1.947969e-02 1.598925e-02 -1.218299594
+  STOCK_TURNOVER                   -4.488376e-03 1.562239e-02 -0.287304109
+  ASSET_TURNOVER                   -5.722492e-01 2.259328e-01 -2.532829146
+  RECEIVABLE_TURNOVER              -1.897351e-03 3.153322e-03 -0.601699150
+  ASSET_ROTATION                   -2.151243e-05 1.338488e-04 -0.160721875
+  FINANCIAL_SOLVENCY                4.807625e-02 7.199720e-02  0.667751668
+  ACID_TEST                        -6.914432e-02 8.749908e-02 -0.790229125
+  NUMBER_JUDICIAL_INCIDENCES_TOTAL  2.588383e-01 4.976518e-01  0.520119282
+  NUMBER_JUDICIAL_INCIDENCES_YEAR   1.963971e+00 7.765604e-01  2.529064015
+  SPENT_JUDICIAL_INCIDENCES_TOTAL   1.416828e-05 1.653221e-05  0.857010930
+  SPENT_JUDICIAL_INCIDENCES_YEAR   -1.046459e-05 1.799522e-05 -0.581520677
+  NUMBER_SERIOUS_INCIDENCES         9.149066e-02 9.474144e-01  0.096568780
+  AUDITORS_OPINIONnegative         -1.600383e+01 1.098586e+04 -0.001456766
+  AUDITORS_OPINIONnothing          -3.828418e-01 5.747520e-01 -0.666099117
+  AUDITORS_OPINIONpositive         -7.729810e-01 7.432291e-01 -1.040030549
+  LINKED_GROUP                     -1.335781e+02 1.105007e+03 -0.120884396
+  DELAY_ACCOUNTS                    2.333198e-01 5.733527e-01  0.406939312
+  AUDITED                           1.849157e+00 4.580038e-01  4.037426464
+									   Pr(>|z|)
+  (Intercept)                      1.627923e-01
+  SIZEmedium                       7.526814e-03
+  SIZEsmall                        7.066803e-03
+  NUMBER_EMPLOYEES                 7.232063e-01
+  AGE                              6.028823e-02
+  NUMBER_PARTNERS                  5.612552e-02
+  CHANGES_LOCATION                 8.367499e-01
+  DEBT_STRUCTURE                   2.377249e-01
+  DEBT_COST                        2.505280e-03
+  DEBT_PAYING_AVAILABILITY         8.005301e-01
+  DEBT_RATIO                       9.910427e-01
+  WORKING_CAPITAL                  3.163559e-01
+  WARRANTY                         8.863852e-01
+  OPERATING_INCOME_MARGIN          8.926542e-01
+  RETURN_OPERATING_ASSETS          9.943133e-01
+  RETURN_EQUITY                    7.443901e-01
+  RETURN_ASSETS                    2.231101e-01
+  STOCK_TURNOVER                   7.738795e-01
+  ASSET_TURNOVER                   1.131461e-02
+  RECEIVABLE_TURNOVER              5.473744e-01
+  ASSET_ROTATION                   8.723125e-01
+  FINANCIAL_SOLVENCY               5.042921e-01
+  ACID_TEST                        4.293940e-01
+  NUMBER_JUDICIAL_INCIDENCES_TOTAL 6.029804e-01
+  NUMBER_JUDICIAL_INCIDENCES_YEAR  1.143672e-02
+  SPENT_JUDICIAL_INCIDENCES_TOTAL  3.914388e-01
+  SPENT_JUDICIAL_INCIDENCES_YEAR   5.608896e-01
+  NUMBER_SERIOUS_INCIDENCES        9.230689e-01
+  AUDITORS_OPINIONnegative         9.988377e-01
+  AUDITORS_OPINIONnothing          5.053477e-01
+  AUDITORS_OPINIONpositive         2.983257e-01
+  LINKED_GROUP                     9.037826e-01
+  DELAY_ACCOUNTS                   6.840526e-01
+  AUDITED                          5.404078e-05
+#+end_example
+
+전체 변수를 이용해서 로지스틱 회귀 분석을 한 결과 =SIZEmedium=, =SIZEsmall=, =DEBT_COST= 등이, =AUDITED= 등의 변수의 p-value가 0.001 미만으로 유의하게 나왔다.
+이중 =AUDITED= 는 p-value가 5.4e-05으로 가장 적었다.
+
+p-value가 0.01미만으로 약간 유의하게 나온 변수는 =ASSET_TURNOVER=, =NUMBER_JUDICIAL_INCIDENCES_YEAR= 등이다.
+
+[[./logistic.png]]
+
+기준점을 0.01로 잡을 때는 에러율이 30%였다가 0.05로 잡으면 7%, 0.1로 잡으면 3%로 줄며, 0.2는 2.3%, 0.5는 2.1%로 주는 폭이 크게 주는것을 볼 수 있다.
 
 *** LDA
 
@@ -88,6 +228,154 @@ source(file="sample.R")
 ** 변수 선택
 
 *** Subset Selection
+
+#+NAME: subset
+	 #+BEGIN_SRC R :results output :eval never-export :exports both
+source(file="variable-selection.R")
+	 #+END_SRC
+
+  #+RESULTS: subset
+  #+begin_example
+  [1] "Subset"
+  [1] "C_p"
+  [1] 15
+					  (Intercept)                      SIZEmedium 
+					 1.099424e+00                   -1.013674e-01 
+						SIZEsmall                NUMBER_EMPLOYEES 
+					-9.441615e-02                   -5.553358e-05 
+							  AGE                       DEBT_COST 
+					 5.804698e-04                    6.045425e-05 
+				  WORKING_CAPITAL                   RETURN_EQUITY 
+					-5.938758e-03                   -5.173920e-07 
+					RETURN_ASSETS                  ASSET_TURNOVER 
+					-6.997203e-04                   -1.810321e-03 
+  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
+					 1.057587e-01                    1.389058e-06 
+		NUMBER_SERIOUS_INCIDENCES        AUDITORS_OPINIONpositive 
+					-3.754848e-02                   -1.809547e-02 
+					 LINKED_GROUP                         AUDITED 
+					-4.088631e-02                    3.563019e-02 
+  [1] "BIC"
+  [1] 8
+					  (Intercept)                      SIZEmedium 
+					 1.067797e+00                   -7.231181e-02 
+						SIZEsmall                       DEBT_COST 
+					-6.134645e-02                    6.660574e-05 
+					RETURN_EQUITY                   RETURN_ASSETS 
+					-5.222434e-07                   -7.952889e-04 
+  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
+					 1.011653e-01                    1.314959e-06 
+						  AUDITED 
+					 3.401960e-02 
+  [1] "Ajr^2"
+  [1] 16
+					  (Intercept)                      SIZEmedium 
+					 1.109480e+00                   -1.077697e-01 
+						SIZEsmall                NUMBER_EMPLOYEES 
+					-1.025763e-01                   -5.030466e-05 
+							  AGE                 NUMBER_PARTNERS 
+					 5.835440e-04                   -5.142603e-04 
+						DEBT_COST                 WORKING_CAPITAL 
+					 6.123117e-05                   -5.726939e-03 
+					RETURN_EQUITY                   RETURN_ASSETS 
+					-5.183379e-07                   -7.108301e-04 
+				   ASSET_TURNOVER NUMBER_JUDICIAL_INCIDENCES_YEAR 
+					-1.820269e-03                    1.061103e-01 
+  SPENT_JUDICIAL_INCIDENCES_TOTAL       NUMBER_SERIOUS_INCIDENCES 
+					 1.393146e-06                   -3.839968e-02 
+		 AUDITORS_OPINIONpositive                    LINKED_GROUP 
+					-1.873016e-02                   -4.036312e-02 
+						  AUDITED 
+					 3.825724e-02 
+  [1] "Forward"
+  [1] "C_p"
+  [1] 15
+					  (Intercept)                      SIZEmedium 
+					 1.099424e+00                   -1.013674e-01 
+						SIZEsmall                NUMBER_EMPLOYEES 
+					-9.441615e-02                   -5.553358e-05 
+							  AGE                       DEBT_COST 
+					 5.804698e-04                    6.045425e-05 
+				  WORKING_CAPITAL                   RETURN_EQUITY 
+					-5.938758e-03                   -5.173920e-07 
+					RETURN_ASSETS                  ASSET_TURNOVER 
+					-6.997203e-04                   -1.810321e-03 
+  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
+					 1.057587e-01                    1.389058e-06 
+		NUMBER_SERIOUS_INCIDENCES        AUDITORS_OPINIONpositive 
+					-3.754848e-02                   -1.809547e-02 
+					 LINKED_GROUP                         AUDITED 
+					-4.088631e-02                    3.563019e-02 
+  [1] "BIC"
+  [1] 9
+					  (Intercept)                      SIZEmedium 
+					 1.059610e+00                   -7.215902e-02 
+						SIZEsmall                             AGE 
+					-5.997861e-02                    5.933760e-04 
+						DEBT_COST                   RETURN_EQUITY 
+					 6.575630e-05                   -5.217266e-07 
+					RETURN_ASSETS NUMBER_JUDICIAL_INCIDENCES_YEAR 
+					-7.787640e-04                    1.039189e-01 
+  SPENT_JUDICIAL_INCIDENCES_TOTAL                         AUDITED 
+					 1.308219e-06                    3.058008e-02 
+  [1] "Ajr^2"
+  [1] 16
+					  (Intercept)                      SIZEmedium 
+					 1.109480e+00                   -1.077697e-01 
+						SIZEsmall                NUMBER_EMPLOYEES 
+					-1.025763e-01                   -5.030466e-05 
+							  AGE                 NUMBER_PARTNERS 
+					 5.835440e-04                   -5.142603e-04 
+						DEBT_COST                 WORKING_CAPITAL 
+					 6.123117e-05                   -5.726939e-03 
+					RETURN_EQUITY                   RETURN_ASSETS 
+					-5.183379e-07                   -7.108301e-04 
+				   ASSET_TURNOVER NUMBER_JUDICIAL_INCIDENCES_YEAR 
+					-1.820269e-03                    1.061103e-01 
+  SPENT_JUDICIAL_INCIDENCES_TOTAL       NUMBER_SERIOUS_INCIDENCES 
+					 1.393146e-06                   -3.839968e-02 
+		 AUDITORS_OPINIONpositive                    LINKED_GROUP 
+					-1.873016e-02                   -4.036312e-02 
+						  AUDITED 
+					 3.825724e-02 
+  [1] "Backward"
+  [1] "C_p"
+  [1] 8
+					  (Intercept)                      SIZEmedium 
+					 1.067797e+00                   -7.231181e-02 
+						SIZEsmall                       DEBT_COST 
+					-6.134645e-02                    6.660574e-05 
+					RETURN_EQUITY                   RETURN_ASSETS 
+					-5.222434e-07                   -7.952889e-04 
+  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
+					 1.011653e-01                    1.314959e-06 
+						  AUDITED 
+					 3.401960e-02 
+  [1] "BIC"
+  [1] 8
+					  (Intercept)                      SIZEmedium 
+					 1.067797e+00                   -7.231181e-02 
+						SIZEsmall                       DEBT_COST 
+					-6.134645e-02                    6.660574e-05 
+					RETURN_EQUITY                   RETURN_ASSETS 
+					-5.222434e-07                   -7.952889e-04 
+  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
+					 1.011653e-01                    1.314959e-06 
+						  AUDITED 
+					 3.401960e-02 
+  [1] "Ajr^2"
+  [1] 8
+					  (Intercept)                      SIZEmedium 
+					 1.067797e+00                   -7.231181e-02 
+						SIZEsmall                       DEBT_COST 
+					-6.134645e-02                    6.660574e-05 
+					RETURN_EQUITY                   RETURN_ASSETS 
+					-5.222434e-07                   -7.952889e-04 
+  NUMBER_JUDICIAL_INCIDENCES_YEAR SPENT_JUDICIAL_INCIDENCES_TOTAL 
+					 1.011653e-01                    1.314959e-06 
+						  AUDITED 
+					 3.401960e-02 
+#+end_example
 
 
 *** Shrinkage Methods(Ridge, Lasso)
