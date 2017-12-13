@@ -63,37 +63,40 @@ error.glm <- function (formula, train.data, test.data, thresh) {
     glm.fit = glm(formula, data=train.data, family="binomial")
     glm.res = predict(glm.fit, data=test.data, type="response")
     if (any(glm.res < 0 | glm.res > 1)) stop ("로지스틱 회귀로 예측한 값이 0 또는 1이 아닙니다.")
-    glm.pred = rep("NO", length(test.data[,1]))
-    glm.pred[glm.res[glm.res>thresh]] = "YES"
+    glm.pred = rep("NO", length(glm.res))
+    glm.pred[glm.res>thresh] = "YES"
+    print(length(glm.pred))
     return(mean(glm.pred != test.data$BANKRUPTCY))
 }
 error.cv <- function (formula, data, thresh, seed.num) {
+    print("CV")
     data.len = length(data[,1])
     set.seed(seed.num)
-    train = sample(1:data.len, ceiling(data.len/2))
+    train = sample(1:data.len, data.len/2)
     train.data = data[train,]
     test.data = data[-train,]
 
     return(error.glm(formula, train.data, test.data, thresh))
 }
-error.loocv <- function (formula, data, thresh) {
+error.loocv <- function (formula, data, k=100, thresh) {
     data.len = length(data[,1])
     CV = c()
-    glm.fit = glm(formula, data=data, family="binomial")
-    return(cv.glm(data, glm.fit, K=10)$delta[1])
-    ## cv.error(1:data.len)
-    ## for (i in 1:data.len) {
-    ##     print(i)
-    ##     test = c(i)
-    ##     test.data = data[test,]
-    ##     train.data = data[-test,]
-    ##     CV = c(CV, error.glm(formula, train.data, test.data, thresh))
-    ## }
-    ## return(mean(CV))
+    base = floor(data.len/k)
+    start = 1
+    while (start < data.len) {
+        end = start + base
+        if (end > data.len) end = data.len
+        test = c(start:end)
+        test.data = data[test,]
+        train.data = data[-test,]
+        CV = c(CV, error.glm(formula, train.data, test.data, thresh))
+        start = end + 1
+    }
+    return(mean(CV))
 }
 error.10fold <- function (formula, data, thresh) {
 }
-cross.validation <- function (regfit, data, seed.num) {
+cross.validation <- function (regfit, data, thresh, seed.num=11) {
     
     cp = summary(regfit)$cp
     bic = summary(regfit)$bic
@@ -114,12 +117,16 @@ cross.validation <- function (regfit, data, seed.num) {
     formula.bic = gen.formula(coef.bic, "BANKRUPTCY")
     formula.adjr2 = gen.formula(coef.adjr2, "BANKRUPTCY")
 
-    print(error.cv(formula.cp, data, 0.5, seed.num))
-    print(error.loocv(formula.cp, data, 0.5))
+    print(error.cv(formula.cp, data, thresh, seed.num))
+    ## print(error.loocv(formula.cp, data, 50, 0.7))
+    ## print(error.loocv(formula.cp, data, 10, 0.7))
+    print(error.cv(formula.bic, data, thresh, seed.num))
+    ## print(error.loocv(formula.bic, data, 50, 0.7))
+    ## print(error.loocv(formula.bic, data, 10, 0.7))
+    print(error.cv(formula.adjr2, data, thresh, seed.num))
+    ## print(error.loocv(formula.adjr2, data, 50, 0.7))
+    ## print(error.loocv(formula.adjr2, data, 10, 0.7))
     ## set.seed(seed.num)
-    ## train = sample(1:data.len, floor(data.len/2))
-    ## train.data = data[train,]
-    ## test.data = data[-train,]
     
     ## glmfit.cp = glm(formula.cp, data=train.data, family="binomial")
     ## glmfit.bic = glm(formula.bic, data=train.data, family="binomial")
@@ -137,13 +144,36 @@ cross.validation <- function (regfit, data, seed.num) {
 regfit.full <- subset.simple(data)
 regfit.fwd <- subset.simple(data, 'forward')
 regfit.bwd <- subset.simple(data, 'backward')
-
-plot.gen(regfit.full, './plots/tmp/full.png')
-plot.gen(regfit.fwd, './plots/tmp/forward.png')
-plot.gen(regfit.bwd, './plots/tmp/backward.png')
+summary(regfit.fwd)$cp
+summary(regfit.bwd)$cp
+summary(regfit.full)$cp
+plot.gen(regfit.full, './plots/full.png')
+plot.gen(regfit.fwd, './plots/forward.png')
+plot.gen(regfit.bwd, './plots/backward.png')
 
 coef.print(regfit.full)
 coef.print(regfit.fwd)
 coef.print(regfit.bwd)
+summary(aa)$cp
+summary(bb)$bic
+summary(cc)$cp
+?regsubsets
+coef.print(aa)
+coef.print(bb)
+coef.print(cc)
+aa = regsubsets(BANKRUPTCY ~ ., nvmax=31, data=data)
+bb = regsubsets(BANKRUPTCY ~ ., nvmax=31, data=data, method="forward")
+cc = regsubsets(BANKRUPTCY ~ ., nvmax=31, data=data, method="backward")
 
 predict.regsubsets(coef(regfit.fwd, which.min(summary(regfit.fwd)$cp)), data)
+?rep
+
+cross.validation(regfit.full, data, 0.4, 15)
+length(data$BANKRUPTCY)
+    train = sample(1:2382, 1191)
+
+length(rep("NO", 1191))
+
+3%%2
+
+?glm
