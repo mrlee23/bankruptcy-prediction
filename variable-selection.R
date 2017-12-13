@@ -74,9 +74,24 @@ error.cv <- function (formula, data, thresh, seed.num) {
     train.data = data[train,]
     test.data = data[-train,]
 
-    return(error.glm(formula, train.data, test.data, 0.5))
+    return(error.glm(formula, train.data, test.data, thresh))
 }
-error.loocv <- function (formula, data) {
+error.loocv <- function (formula, data, thresh) {
+    data.len = length(data[,1])
+    CV = c()
+    glm.fit = glm(formula, data=data, family="binomial")
+    return(cv.glm(data, glm.fit, K=10)$delta[1])
+    ## cv.error(1:data.len)
+    ## for (i in 1:data.len) {
+    ##     print(i)
+    ##     test = c(i)
+    ##     test.data = data[test,]
+    ##     train.data = data[-test,]
+    ##     CV = c(CV, error.glm(formula, train.data, test.data, thresh))
+    ## }
+    ## return(mean(CV))
+}
+error.10fold <- function (formula, data, thresh) {
 }
 cross.validation <- function (regfit, data, seed.num) {
     
@@ -100,6 +115,7 @@ cross.validation <- function (regfit, data, seed.num) {
     formula.adjr2 = gen.formula(coef.adjr2, "BANKRUPTCY")
 
     print(error.cv(formula.cp, data, 0.5, seed.num))
+    print(error.loocv(formula.cp, data, 0.5))
     ## set.seed(seed.num)
     ## train = sample(1:data.len, floor(data.len/2))
     ## train.data = data[train,]
