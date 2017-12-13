@@ -49,7 +49,7 @@ convert.data <- function (data, columns) {
 print(dim(data))
 data = exclude.data(data, c())
 ## data = exclude.data(data, c("YEAR","SOCIAL_CODE","PROVINCE_CODE", "AUDITORS_OPINION"))
-data = exclude.data(data, c("PROVINCE_CODE"))
+data = exclude.data(data, c("SOCIAL_CODE", "PROVINCE_CODE"))
 data = remove.noise(data, "AGE", -1)
 ## data = convert.data(data, c("BANKRUPTCY")) # LDA, QDA 분석 시 해당 코드를 사용할 것.
 print(dim(data))
