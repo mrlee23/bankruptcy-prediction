@@ -21,3 +21,8 @@ min(scale(data$DEBT_RATIO))
 max(scale(data$DEBT_RATIO))
 sd(scale(data$DEBT_RATIO))
 mean(scale(data$BANKRUPTCY))
+
+length(aaa)
+length(data[-aaa,]$BANKRUPTCY)
+length(data[,1])
+ceiling(2.1)
