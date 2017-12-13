@@ -137,12 +137,9 @@ cross.validation <- function (vars, data, thresh, seed.num) {
     return(data.frame(cv=result.cv, loocv=result.loocv, "10-fold"=result.10fold))
 }
 
-regfit.full <- subset.simple(data)
 regfit.full <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data)
-regfit.fwd <- subset.simple(data, 'forward')
-regfit.fwd <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data)
-regfit.bwd <- subset.simple(data, 'backward')
-regfit.bwd <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data)
+regfit.fwd <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data, method="forward")
+regfit.bwd <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data, method="backward")
 
 plot.gen(regfit.full, './plots/full.png')
 plot.gen(regfit.fwd, './plots/forward.png')
@@ -156,10 +153,23 @@ result.full = subset.cv(regfit.full, data, 0.1, 15)
 result.fwd = subset.cv(regfit.fwd, data, 0.1, 15)
 result.bwd = subset.cv(regfit.bwd, data, 0.05, 15)
 
+result=result.full
+png('./plots/variable-selection-full.png')
+as.matrix(result)
+matplot(as.matrix(result), type = c("b"),pch=1,col = 2:4)
+legend("topright", legend = c("C_p", "BIC", "AdjR^2"), col=2:4, pch=1)
+dev.off()
 
-plot(x=c("CV", "LOOCV", "10-fold"),result[["cp"]], type="l")
+result=result.fwd
+png('./plots/variable-selection-fwd.png')
+as.matrix(result)
+matplot(as.matrix(result), type = c("b"),pch=1,col = 2:4)
+legend("topright", legend = c("C_p", "BIC", "AdjR^2"), col=2:4, pch=1)
+dev.off()
 
-png('./plots/variable-selection.png')
+
+result=result.bwd
+png('./plots/variable-selection-bwd.png')
 as.matrix(result)
 matplot(as.matrix(result), type = c("b"),pch=1,col = 2:4)
 legend("topright", legend = c("C_p", "BIC", "AdjR^2"), col=2:4, pch=1)

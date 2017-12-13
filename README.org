@@ -95,7 +95,11 @@
 [[./plots/backward.png]]
 
 *** 결과
-[[./plots/variable-selection.png]]
+[[./plots/variable-selection-full.png]]
+
+[[./plots/variable-selection-fwd.png]]
+
+[[./plots/variable-selection-bwd.png]]
 
 | Error rate              |        C_p |        BIC |     Adjr^2 |
 |-------------------------+------------+------------+------------|
@@ -127,13 +131,9 @@
 | 14                              | 7                               | 15                              |
 
 *** Shrinkage Methods(Ridge, Lasso)
-#+NAME: ridge
-  #+BEGIN_SRC R :results output :eval never-export :exports results
-source(file="ridge.R")
-  #+END_SRC
+[[./plots/ridge.png]]
 
-  #+RESULTS: ridge
-[[./plots/ridge-regression.png]]
+[[./plots/lasso.png]]
 
 ** 최종 모델 선택
 
