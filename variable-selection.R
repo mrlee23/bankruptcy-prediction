@@ -56,8 +56,8 @@ clear.names <- function (names) {
     }
     return(unique(gsub("[a-z]*", "", names[-1])))
 }
-gen.formula <- function (coef, y) {
-    as.formula(paste(y, "~", paste(clear.names(names(coef)), collapse="+")))
+gen.formula <- function (vars, y) {
+    as.formula(paste(y, "~", paste(clear.names(vars), collapse="+")))
 }
 error.glm <- function (formula, train.data, test.data, thresh) {
     glm.fit = glm(formula, data=train.data, family="binomial")
@@ -94,7 +94,7 @@ error.loocv <- function (formula, data, k=100, thresh, seed.num) {
     }
     return(mean(CV))
 }
-cross.validation <- function (regfit, data, thresh, seed.num=11) {
+subset.cv <- function (regfit, data, thresh, seed.num) {
     LOOCV_K = 200
     
     cp = summary(regfit)$cp
@@ -105,9 +105,9 @@ cross.validation <- function (regfit, data, thresh, seed.num=11) {
     coef.bic = coef(regfit, which.min(bic))
     coef.adjr2 = coef(regfit, which.max(adjr2))
 
-    formula.cp = gen.formula(coef.cp, "BANKRUPTCY")
-    formula.bic = gen.formula(coef.bic, "BANKRUPTCY")
-    formula.adjr2 = gen.formula(coef.adjr2, "BANKRUPTCY")
+    formula.cp = gen.formula(names(coef.cp), "BANKRUPTCY")
+    formula.bic = gen.formula(names(coef.bic), "BANKRUPTCY")
+    formula.adjr2 = gen.formula(names(coef.adjr2), "BANKRUPTCY")
 
     print(formula.cp)
     print(formula.bic)
@@ -128,6 +128,14 @@ cross.validation <- function (regfit, data, thresh, seed.num=11) {
     rownames(result) <- c("cv", "loocv", "10-fold")
     return(result)
 }
+cross.validation <- function (vars, data, thresh, seed.num) {
+    LOOCV_K = 200
+    formula = gen.formula(vars, "BANKRUPTCY")
+    result.cv = error.cv(formula, data, thresh, seed.num)
+    result.loocv = error.loocv(formula, data, LOOCV_K, thresh, seed.num)
+    result.10fold = error.loocv(formula, data, 10, thresh, seed.num)
+    return(data.frame(cv=result.cv, loocv=result.loocv, "10-fold"=result.10fold))
+}
 
 regfit.full <- subset.simple(data)
 regfit.full <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data)
@@ -144,9 +152,9 @@ coef.print(regfit.full)
 coef.print(regfit.fwd)
 coef.print(regfit.bwd)
 
-result.full = cross.validation(regfit.full, data, 0.5, 15)
-result.fwd = cross.validation(regfit.fwd, data, 0.5, 15)
-result.bwd = cross.validation(regfit.bwd, data, 0.5, 15)
+result.full = subset.cv(regfit.full, data, 0.1, 15)
+result.fwd = subset.cv(regfit.fwd, data, 0.1, 15)
+result.bwd = subset.cv(regfit.bwd, data, 0.05, 15)
 
 
 plot(x=c("CV", "LOOCV", "10-fold"),result[["cp"]], type="l")
