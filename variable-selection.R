@@ -65,11 +65,9 @@ error.glm <- function (formula, train.data, test.data, thresh) {
     if (any(glm.res < 0 | glm.res > 1)) stop ("로지스틱 회귀로 예측한 값이 0 또는 1이 아닙니다.")
     glm.pred = rep("NO", length(glm.res))
     glm.pred[glm.res>thresh] = "YES"
-    print(length(glm.pred))
     return(mean(glm.pred != test.data$BANKRUPTCY))
 }
 error.cv <- function (formula, data, thresh, seed.num) {
-    print("CV")
     data.len = length(data[,1])
     set.seed(seed.num)
     train = sample(1:data.len, data.len/2)
@@ -78,15 +76,17 @@ error.cv <- function (formula, data, thresh, seed.num) {
 
     return(error.glm(formula, train.data, test.data, thresh))
 }
-error.loocv <- function (formula, data, k=100, thresh) {
+error.loocv <- function (formula, data, k=100, thresh, seed.num) {
     data.len = length(data[,1])
     CV = c()
-    base = floor(data.len/k)
+    set.seed(seed.num)
+    base = sample(1:data.len)
+    count = floor(data.len/k)
     start = 1
     while (start < data.len) {
-        end = start + base
+        end = start + count
         if (end > data.len) end = data.len
-        test = c(start:end)
+        test = base[c(start:end)]
         test.data = data[test,]
         train.data = data[-test,]
         CV = c(CV, error.glm(formula, train.data, test.data, thresh))
@@ -94,9 +94,8 @@ error.loocv <- function (formula, data, k=100, thresh) {
     }
     return(mean(CV))
 }
-error.10fold <- function (formula, data, thresh) {
-}
 cross.validation <- function (regfit, data, thresh, seed.num=11) {
+    LOOCV_K = 200
     
     cp = summary(regfit)$cp
     bic = summary(regfit)$bic
@@ -106,47 +105,37 @@ cross.validation <- function (regfit, data, thresh, seed.num=11) {
     coef.bic = coef(regfit, which.min(bic))
     coef.adjr2 = coef(regfit, which.max(adjr2))
 
-    ## vars.cp = clear.names(names(coef.cp))
-    ## vars.bic = clear.names(names(coef.bic))
-    ## vars.adjr2 = clear.names(names(coef.adjr2))
-
-    ## formula.cp = gen.formula("BANKRUPTCY", vars.cp)
-    ## formula.bic = gen.formula("BANKRUPTCY", vars.bic)
-    ## formula.adjr2 = gen.formula("BANKRUPTCY", vars.adjr2)
     formula.cp = gen.formula(coef.cp, "BANKRUPTCY")
     formula.bic = gen.formula(coef.bic, "BANKRUPTCY")
     formula.adjr2 = gen.formula(coef.adjr2, "BANKRUPTCY")
 
-    print(error.cv(formula.cp, data, thresh, seed.num))
-    ## print(error.loocv(formula.cp, data, 50, 0.7))
-    ## print(error.loocv(formula.cp, data, 10, 0.7))
-    print(error.cv(formula.bic, data, thresh, seed.num))
-    ## print(error.loocv(formula.bic, data, 50, 0.7))
-    ## print(error.loocv(formula.bic, data, 10, 0.7))
-    print(error.cv(formula.adjr2, data, thresh, seed.num))
-    ## print(error.loocv(formula.adjr2, data, 50, 0.7))
-    ## print(error.loocv(formula.adjr2, data, 10, 0.7))
-    ## set.seed(seed.num)
+    print(formula.cp)
+    print(formula.bic)
+    print(formula.adjr2)
     
-    ## glmfit.cp = glm(formula.cp, data=train.data, family="binomial")
-    ## glmfit.bic = glm(formula.bic, data=train.data, family="binomial")
-    ## glmfit.adjr2 = glm(formula.adjr2, data=train.data, family="binomial")
-
-    ## res.cp = predict(glmfit.cp, data=test.data, type="response")
-    ## res.bic = predict(glmfit.bic, data=test.data, type="response")
-    ## res.adjr2 = predict(glmfit.adjr2, data=test.data, type="response")
-    ## if (any(res.cp < 0 | res.cp > 1)) stop ("예측한 Cp값이 0 또는 1이 아닙니다.")
-    ## if (any(res.bic < 0 | res.bic > 1)) stop ("예측한 BIC값이 0 또는 1이 아닙니다.")
-    ## if (any(res.adjr2 < 0 | res.adjr2 > 1)) stop ("예측한 Adjr2값이 0 또는 1이 아닙니다.")
+    result.cp = c(error.cv(formula.cp, data, thresh, seed.num),
+                  error.loocv(formula.cp, data, LOOCV_K, thresh, seed.num),
+                  error.loocv(formula.cp, data, 10, thresh, seed.num))
+    
+    result.bic = c(error.cv(formula.bic, data, thresh, seed.num),
+                   error.loocv(formula.bic, data, LOOCV_K, thresh, seed.num),
+                   error.loocv(formula.bic, data, 10, thresh, seed.num))
+    
+    result.adjr2 = c(error.cv(formula.adjr2, data, thresh, seed.num),
+                     error.loocv(formula.adjr2, data, LOOCV_K, thresh, seed.num),
+                     error.loocv(formula.adjr2, data, 10, thresh, seed.num))
+    result = data.frame(cp=result.cp, bic=result.bic, adjr2=result.adjr2)
+    rownames(result) <- c("cv", "loocv", "10-fold")
+    return(result)
 }
 
-
 regfit.full <- subset.simple(data)
+regfit.full <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data)
 regfit.fwd <- subset.simple(data, 'forward')
+regfit.fwd <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data)
 regfit.bwd <- subset.simple(data, 'backward')
-summary(regfit.fwd)$cp
-summary(regfit.bwd)$cp
-summary(regfit.full)$cp
+regfit.bwd <- regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data)
+
 plot.gen(regfit.full, './plots/full.png')
 plot.gen(regfit.fwd, './plots/forward.png')
 plot.gen(regfit.bwd, './plots/backward.png')
@@ -154,26 +143,16 @@ plot.gen(regfit.bwd, './plots/backward.png')
 coef.print(regfit.full)
 coef.print(regfit.fwd)
 coef.print(regfit.bwd)
-summary(aa)$cp
-summary(bb)$bic
-summary(cc)$cp
-?regsubsets
-coef.print(aa)
-coef.print(bb)
-coef.print(cc)
-aa = regsubsets(BANKRUPTCY ~ ., nvmax=31, data=data)
-bb = regsubsets(BANKRUPTCY ~ ., nvmax=31, data=data, method="forward")
-cc = regsubsets(BANKRUPTCY ~ ., nvmax=31, data=data, method="backward")
 
-predict.regsubsets(coef(regfit.fwd, which.min(summary(regfit.fwd)$cp)), data)
-?rep
+result.full = cross.validation(regfit.full, data, 0.5, 15)
+result.fwd = cross.validation(regfit.fwd, data, 0.5, 15)
+result.bwd = cross.validation(regfit.bwd, data, 0.5, 15)
 
-cross.validation(regfit.full, data, 0.4, 15)
-length(data$BANKRUPTCY)
-    train = sample(1:2382, 1191)
 
-length(rep("NO", 1191))
+plot(x=c("CV", "LOOCV", "10-fold"),result[["cp"]], type="l")
 
-3%%2
-
-?glm
+png('./plots/variable-selection.png')
+as.matrix(result)
+matplot(as.matrix(result), type = c("b"),pch=1,col = 2:4)
+legend("topright", legend = c("C_p", "BIC", "AdjR^2"), col=2:4, pch=1)
+dev.off()

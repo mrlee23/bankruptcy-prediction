@@ -85,78 +85,46 @@
 
 ** 변수 선택
 
-*** Subset Selection
+*** Best subset
+[[./plots/full.png]]
 
-#+NAME: subset
-	 #+BEGIN_SRC R :results output :eval never-export :exports both
-source(file="variable-selection.R")
-	 #+END_SRC
+*** Forward
+[[./plots/forward.png]]
 
-**** subset(nvmax=31)
-[[./plots/subset.png]]
+*** Backward
+[[./plots/backward.png]]
 
-| C_p                             | BIC                             | Ajr^2                           |
+*** 결과
+[[./plots/variable-selection.png]]
+
+| Error rate              |        C_p |        BIC |     Adjr^2 |
+|-------------------------+------------+------------+------------|
+| Validation set approach | 0.02770781 | 0.02434929 | 0.02686818 |
+| LOOCV(K=200)            |  0.0257659 | 0.02494747 | 0.02539273 |
+| 10-fold(K=10)           | 0.02644765 | 0.02537491 | 0.02598153 |
+|-------------------------+------------+------------+------------|
+| 최소                    |  0.0257659 | 0.02434929 | 0.02539273 |
+#+TBLFM: @II=vmin(@I)  
+
+| C_p                             | BIC                             | Adjr^2                          |
 |---------------------------------+---------------------------------+---------------------------------|
-| SIZEmedium                      | SIZEmedium                      | SIZEmedium                      |
-| SIZEsmall                       | SIZEsmall                       | SIZEsmall                       |
+| SIZE                            | SIZE                            | SIZE                            |
 | NUMBER_EMPLOYEES                | DEBT_COST                       | NUMBER_EMPLOYEES                |
 | AGE                             | RETURN_EQUITY                   | AGE                             |
-| DEBT_COST                       | RETURN_ASSETS                   | NUMBER_PARTNERS                 |
-| WORKING_CAPITAL                 | NUMBER_JUDICIAL_INCIDENCES_YEAR | DEBT_COST                       |
-| RETURN_EQUITY                   | SPENT_JUDICIAL_INCIDENCES_TOTAL | WORKING_CAPITAL                 |
-| RETURN_ASSETS                   | AUDITED                         | RETURN_EQUITY                   |
+| LINKED_GROUP                    | RETURN_ASSETS                   | LINKED_GROUP                    |
+| DEBT_COST                       | NUMBER_JUDICIAL_INCIDENCES_YEAR | NUMBER_PARTNERS                 |
+| WORKING_CAPITAL                 | SPENT_JUDICIAL_INCIDENCES_TOTAL | DEBT_COST                       |
+| RETURN_EQUITY                   | AUDITED                         | WORKING_CAPITAL                 |
+| RETURN_ASSETS                   |                                 | RETURN_EQUITY                   |
 | ASSET_TURNOVER                  |                                 | RETURN_ASSETS                   |
 | NUMBER_JUDICIAL_INCIDENCES_YEAR |                                 | ASSET_TURNOVER                  |
 | SPENT_JUDICIAL_INCIDENCES_TOTAL |                                 | NUMBER_JUDICIAL_INCIDENCES_YEAR |
 | NUMBER_SERIOUS_INCIDENCES       |                                 | SPENT_JUDICIAL_INCIDENCES_TOTAL |
-| AUDITORS_OPINIONpositive        |                                 | NUMBER_SERIOUS_INCIDENCES       |
-| LINKED_GROUP                    |                                 | AUDITORS_OPINIONpositive        |
-| AUDITED                         |                                 | LINKED_GROUP                    |
-|                                 |                                 | AUDITED                         |
+| AUDITED                         |                                 | NUMBER_SERIOUS_INCIDENCES       |
+| AUDITORS_OPINION                |                                 | AUDITED                         |
+|                                 |                                 | AUDITORS_OPINION                |
 |---------------------------------+---------------------------------+---------------------------------|
-| 15                              | 8                               | 16                              |
-C_p는 Ajr^2 에있는 NUMBER_PARTNERS가 없다.
-
-**** forward
-[[./plots/forward.png]]
-
-| C_p                             | BIC                             | Ajr^2                           |
-|---------------------------------+---------------------------------+---------------------------------|
-| SIZEmedium                      | SIZEmedium                      | SIZEmedium                      |
-| SIZEsmall                       | SIZEsmall                       | SIZEsmall                       |
-| NUMBER_EMPLOYEES                | AGE                             | NUMBER_EMPLOYEES                |
-| AGE                             | DEBT_COST                       | AGE                             |
-| DEBT_COST                       | RETURN_EQUITY                   | NUMBER_PARTNERS                 |
-| WORKING_CAPITAL                 | RETURN_ASSETS                   | DEBT_COST                       |
-| RETURN_EQUITY                   | NUMBER_JUDICIAL_INCIDENCES_YEAR | WORKING_CAPITAL                 |
-| RETURN_ASSETS                   | SPENT_JUDICIAL_INCIDENCES_TOTAL | RETURN_EQUITY                   |
-| ASSET_TURNOVER                  | AUDITED                         | RETURN_ASSETS                   |
-| NUMBER_JUDICIAL_INCIDENCES_YEAR |                                 | ASSET_TURNOVER                  |
-| SPENT_JUDICIAL_INCIDENCES_TOTAL |                                 | NUMBER_JUDICIAL_INCIDENCES_YEAR |
-| NUMBER_SERIOUS_INCIDENCES       |                                 | SPENT_JUDICIAL_INCIDENCES_TOTAL |
-| AUDITORS_OPINIONpositive        |                                 | NUMBER_SERIOUS_INCIDENCES       |
-| LINKED_GROUP                    |                                 | AUDITORS_OPINIONpositive        |
-| AUDITED                         |                                 | LINKED_GROUP                    |
-|                                 |                                 | AUDITED                         |
-|---------------------------------+---------------------------------+---------------------------------|
-| 15                              | 9                               | 16                              |
-
-**** backward
-[[./plots/backward.png]]
-| C_p                             | BIC                             | Ajr^2                           |
-|---------------------------------+---------------------------------+---------------------------------|
-| SIZEmedium                      | SIZEmedium                      | SIZEmedium                      |
-| SIZEsmall                       | SIZEsmall                       | SIZEsmall                       |
-| DEBT_COST                       | DEBT_COST                       | DEBT_COST                       |
-| RETURN_EQUITY                   | RETURN_EQUITY                   | RETURN_EQUITY                   |
-| RETURN_ASSETS                   | RETURN_ASSETS                   | RETURN_ASSETS                   |
-| NUMBER_JUDICIAL_INCIDENCES_YEAR | NUMBER_JUDICIAL_INCIDENCES_YEAR | NUMBER_JUDICIAL_INCIDENCES_YEAR |
-| SPENT_JUDICIAL_INCIDENCES_TOTAL | SPENT_JUDICIAL_INCIDENCES_TOTAL | SPENT_JUDICIAL_INCIDENCES_TOTAL |
-| AUDITED                         | AUDITED                         | AUDITED                         |
-|---------------------------------+---------------------------------+---------------------------------|
-| 8                               | 8                               | 8                               |
-
-세가지 모두 동일한 변수를 선택하였다.
+| 14                              | 7                               | 15                              |
 
 *** Shrinkage Methods(Ridge, Lasso)
 #+NAME: ridge
