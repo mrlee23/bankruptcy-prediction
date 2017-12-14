@@ -103,6 +103,10 @@
 
 [[./plots/variable-selection-ridgelasso.png]]
 
+최종 비교
+
+[[./plots/variable-selection.png]]
+
 | Error rate              |        C_p |        BIC |     Adjr^2 |      Ridge |      Lasso |
 |-------------------------+------------+------------+------------+------------+------------|
 | Validation set approach | 0.05121746 | 0.05289673 | 0.05625525 | 0.05541562 | 0.05289673 |
@@ -112,25 +116,25 @@
 | 최소 오류율             | 0.05121746 | 0.04977804 | 0.05533741 | 0.05541562 | 0.05010032 |
 #+TBLFM: @II=vmin(@I)  
 
-| C_p                             | BIC                             | Adjr^2                          |
-|---------------------------------+---------------------------------+---------------------------------|
-| SIZE                            | SIZE                            | SIZE                            |
-| NUMBER_EMPLOYEES                | DEBT_COST                       | NUMBER_EMPLOYEES                |
-| AGE                             | RETURN_EQUITY                   | AGE                             |
-| LINKED_GROUP                    | RETURN_ASSETS                   | LINKED_GROUP                    |
-| DEBT_COST                       | NUMBER_JUDICIAL_INCIDENCES_YEAR | NUMBER_PARTNERS                 |
-| WORKING_CAPITAL                 | SPENT_JUDICIAL_INCIDENCES_TOTAL | DEBT_COST                       |
-| RETURN_EQUITY                   | AUDITED                         | WORKING_CAPITAL                 |
-| RETURN_ASSETS                   |                                 | RETURN_EQUITY                   |
-| ASSET_TURNOVER                  |                                 | RETURN_ASSETS                   |
-| NUMBER_JUDICIAL_INCIDENCES_YEAR |                                 | ASSET_TURNOVER                  |
-| SPENT_JUDICIAL_INCIDENCES_TOTAL |                                 | NUMBER_JUDICIAL_INCIDENCES_YEAR |
-| NUMBER_SERIOUS_INCIDENCES       |                                 | SPENT_JUDICIAL_INCIDENCES_TOTAL |
-| AUDITED                         |                                 | NUMBER_SERIOUS_INCIDENCES       |
-| AUDITORS_OPINION                |                                 | AUDITED                         |
-|                                 |                                 | AUDITORS_OPINION                |
-|---------------------------------+---------------------------------+---------------------------------|
-| 14                              | 7                               | 15                              |
+| C_p                             | BIC                             | Adjr^2                          | Ridge | Lasso                            |
+|---------------------------------+---------------------------------+---------------------------------+-------+----------------------------------|
+| SIZE                            | SIZE                            | SIZE                            | [All] | YEAR                             |
+| NUMBER_EMPLOYEES                | DEBT_COST                       | NUMBER_EMPLOYEES                |       | SIZE                             |
+| AGE                             | RETURN_EQUITY                   | AGE                             |       | AGE                              |
+| LINKED_GROUP                    | RETURN_ASSETS                   | LINKED_GROUP                    |       | LINKED_GROUP                     |
+| DEBT_COST                       | NUMBER_JUDICIAL_INCIDENCES_YEAR | NUMBER_PARTNERS                 |       | WORKING_CAPITAL                  |
+| WORKING_CAPITAL                 | SPENT_JUDICIAL_INCIDENCES_TOTAL | DEBT_COST                       |       | RETURN_EQUITY                    |
+| RETURN_EQUITY                   | AUDITED                         | WORKING_CAPITAL                 |       | RETURN_ASSETS                    |
+| RETURN_ASSETS                   |                                 | RETURN_EQUITY                   |       | ASSET_TURNOVER                   |
+| ASSET_TURNOVER                  |                                 | RETURN_ASSETS                   |       | FINANCIAL_SOLVENCY               |
+| NUMBER_JUDICIAL_INCIDENCES_YEAR |                                 | ASSET_TURNOVER                  |       | NUMBER_JUDICIAL_INCIDENCES_TOTAL |
+| SPENT_JUDICIAL_INCIDENCES_TOTAL |                                 | NUMBER_JUDICIAL_INCIDENCES_YEAR |       | NUMBER_JUDICIAL_INCIDENCES_YEAR  |
+| NUMBER_SERIOUS_INCIDENCES       |                                 | SPENT_JUDICIAL_INCIDENCES_TOTAL |       | SPENT_JUDICIAL_INCIDENCES_TOTAL  |
+| AUDITED                         |                                 | NUMBER_SERIOUS_INCIDENCES       |       | AUDITED                          |
+| AUDITORS_OPINION                |                                 | AUDITED                         |       | AUDITORS_OPINION                 |
+|                                 |                                 | AUDITORS_OPINION                |       |                                  |
+|---------------------------------+---------------------------------+---------------------------------+-------+----------------------------------|
+| 14                              | 7                               | 15                              | 32    | 14                              |
 
 *** Shrinkage Methods(Ridge, Lasso)
 [[./plots/ridge.png]]

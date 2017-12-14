@@ -174,3 +174,11 @@ as.matrix(result)
 matplot(as.matrix(result), type = c("b"),pch=1,col = 2:4)
 legend("topright", legend = c("C_p", "BIC", "AdjR^2"), col=2:4, pch=1)
 dev.off()
+
+
+png('./plots/variable-selection.png')
+mat = as.matrix(cbind(as.matrix(result), t(ridge.result), t(lasso.result)))
+matplot(mat, type = c("b"),pch=1,col = 2:6)
+legend("topright", legend = c("C_p", "BIC", "AdjR^2", "Ridge", "Lasso"), col=2:6, pch=1)
+dev.off()
+
