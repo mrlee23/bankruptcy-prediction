@@ -173,3 +173,9 @@ as.matrix(result)
 matplot(as.matrix(result), type = c("b"),pch=1,col = 2:4)
 legend("topright", legend = c("Ridge", "Lasso"), col=2:4, pch=1)
 dev.off()
+
+library(boot)
+boot.fn = function (data, vector) {
+    return(coef(glm(BANKRUPTCY ~ DEBT_COST+ RETURN_EQUITY, data=data,family = binomial, subset = vector)))
+}
+boot(data, boot.fn, 50)
