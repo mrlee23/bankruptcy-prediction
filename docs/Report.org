@@ -188,7 +188,7 @@ Ridge regression과 Lasso는 먼저 \lambda 를 정해야 한다.
 따라서 \lambda 를 정하는 방법으로 R의 glmnet 패키지의 cv.glmnet 을 이용하여 최적의 \lambda 를 구하였다.
 
 #+CAPTION: Ridge regression
-[[../plots/ridge-regression.png]]
+[[../plots/ridge.png]]
 
 Ridge regression의 최적의 \lambda 값은 0.002977314 이며, 어떤 변수 계수도 0이 되지 않기 때문에 모든 변수를 선택한 것으로 정하였다.
 
