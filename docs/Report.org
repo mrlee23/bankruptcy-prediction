@@ -192,7 +192,7 @@ Best subset, Forward selection, Backward selection 세 방법 모두 C_p, BIC, A
 
 *** Ridge regression, Lasso
 Ridge regression과 Lasso는 먼저 \lambda 를 정해야 한다.
-따라서 \lambda 를 정하는 방법으로 R의 glmnet 패키지의 cv.glmnet 을 이용하여 최적의 \lambda 를 구하였다.
+따라서 \lambda 를 정하는 방법으로 R의 glmnet 패키지의 cv.glmnet 을 이용하여 최적의 \lambda 를 구하였다.[fn:4]
 
 #+CAPTION: Ridge regression
 [[../plots/ridge.png]]
@@ -300,7 +300,7 @@ Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best s
 ** 3.5. 분류 방법 비교
 마지막으로 이번 단계에서는 최종 선택된 모델을 이용해 반응변수를 BANKRUPTCY 로, 독립변수를 SIZE, DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL, AUDITED 로 설정하여
 Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분류하고, 어떤 방법이 가장 예측을 잘하는지 비교하였다.
-먼저 training 데이터와 test 데이터를 5:5의 비율로 랜덤하게 설정하여 진행하였다.
+먼저 training 데이터와 test 데이터를 5:5의 비율로 랜덤하게 설정하여 진행하였다.[fn:4]
 
 #+CAPTION: Logistic regression 예측 표
 | Logistic |   NO | YES |
@@ -354,6 +354,10 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 
 [fn:1] 여기서 사용한 데이터는 https://github.com/amorag/Bankruptcy_2016 에서 확인할 수 있다.
 
-[fn:2] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R 에서 확인할 수 있다.
+[fn:2] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R 에 있다.
+
+[fn:3] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/ridge.R 에 있다.
+
+[fn:4] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/classification.R 에 있다.
 
  

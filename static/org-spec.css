@@ -127,7 +127,7 @@ a[href^="http"]:after {
 }
 
 table {
-    width: 100%;
+	margin: 15px auto;
 }
 
 table, th, td {
@@ -314,10 +314,6 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
     color: #ccc;
 }
 
-div.figure {
-    font-size: 0.85em;
-}
-
 .tag {
     font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
     font-size: 11px;
@@ -441,4 +437,8 @@ div.figure {
     div.notice:before {
         display: none;
     }
+}
+caption, figure {
+	font-weight: bold;
+	font-size: 18px;
 }
