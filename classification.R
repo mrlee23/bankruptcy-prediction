@@ -1,14 +1,14 @@
 source('./load.R')
+library(MASS)
+library(class)
 attach(data)
-plot(data,panel=panel.smooth)
 
-train=sample(1:dim(data)[1], 1191 ,replace=F) #dim(data)[1]*0.7 =1669.5
+train=sample(1:dim(data)[1], dim(data)[1]*0.5 ,replace=F)
 test=-train
 data.train=data[test,]
 BANKRUPTCY.test=data$BANKRUPTCY[test]
 
-#logistic
-
+# Logistic
 glm.fit2=glm(BANKRUPTCY ~ SIZE + DEBT_COST + RETURN_EQUITY 
              + RETURN_ASSETS + NUMBER_JUDICIAL_INCIDENCES_YEAR 
              + SPENT_JUDICIAL_INCIDENCES_TOTAL + AUDITED
@@ -17,7 +17,7 @@ summary(glm.fit2)
 
 glm.prob=predict(glm.fit2,data.train,type="response")
 glm.pred=rep("NO",dim(data.train)[1])
-glm.pred[glm.prob>.0715]="YES" 
+glm.pred[glm.prob>.0715]="YES" # threshold 0.0715
 table(glm.pred,BANKRUPTCY.test)
 mean(glm.pred!=BANKRUPTCY.test)
 
@@ -31,9 +31,7 @@ for (x in seq(0, 0.5, by = 0.0001)) {
 }
 plot(glm.x, glm.y, xlab="Threshold", ylab="Error Rate", type="l")
 
-#lda
-?predict.lda
-library(MASS)
+# LDA
 lda.fit=lda(BANKRUPTCY ~ SIZE + DEBT_COST + RETURN_EQUITY 
             + RETURN_ASSETS + NUMBER_JUDICIAL_INCIDENCES_YEAR 
             + SPENT_JUDICIAL_INCIDENCES_TOTAL + AUDITED
@@ -45,8 +43,8 @@ summary(lda.fit)
 lda.class=lda.pred$class
 table(lda.class,BANKRUPTCY.test)
 mean(lda.class!=BANKRUPTCY.test)
-plot(lda.class)
-#QDA
+
+# QDA
 qda.fit=qda(BANKRUPTCY ~ SIZE + DEBT_COST + RETURN_EQUITY 
             + RETURN_ASSETS + NUMBER_JUDICIAL_INCIDENCES_YEAR 
             + SPENT_JUDICIAL_INCIDENCES_TOTAL + AUDITED
@@ -55,11 +53,8 @@ qda.fit=qda(BANKRUPTCY ~ SIZE + DEBT_COST + RETURN_EQUITY
 qda.class=predict(qda.fit,data.train)$class
 table(qda.class,BANKRUPTCY.test)
 mean(qda.class!=BANKRUPTCY.test)
-plot(qda.class)
 
-#KNN
-library(class)
-
+# KNN
 train.X=cbind(SIZE,DEBT_COST,RETURN_EQUITY 
               ,RETURN_ASSETS,NUMBER_JUDICIAL_INCIDENCES_YEAR 
               ,SPENT_JUDICIAL_INCIDENCES_TOTAL,AUDITED)[train,]
@@ -79,62 +74,3 @@ for (i in 1:30) {
   means[i]=mean;
 }
 min(means)
-?table
-plot(means)
-
-
-#decision plot
-decisionplot <- function(model, data, class = NULL, predict_type = "class",
-                         resolution = 100, showgrid = TRUE, ...) {
-  
-  if(!is.null(class)) cl <- data[,class] else cl <- 1
-  data <- data[,1:2]
-  k <- length(unique(cl))
-  
-  plot(data, col = as.integer(cl)+1L, pch = as.integer(cl)+1L, ...)
-  
-  # make grid
-  r <- sapply(data, range, na.rm = TRUE)
-  xs <- seq(r[1,1], r[2,1], length.out = resolution)
-  ys <- seq(r[1,2], r[2,2], length.out = resolution)
-  g <- cbind(rep(xs, each=resolution), rep(ys, time = resolution))
-  colnames(g) <- colnames(r)
-  g <- as.data.frame(g)
-  
-  ### guess how to get class labels from predict
-  ### (unfortunately not very consistent between models)
-  p <- predict(model, g, type = predict_type)
-  if(is.list(p)) p <- p$class
-  p <- as.factor(p)
-  
-  if(showgrid) points(g, col = as.integer(p)+1L, pch = ".")
-  
-  z <- matrix(as.integer(p), nrow = resolution, byrow = TRUE)
-  contour(xs, ys, z, add = TRUE, drawlabels = FALSE,
-          lwd = 2, levels = (1:(k-1))+.5)
-  
-  invisible(z)
-}
-
-decisionplot(glm.fit,data)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

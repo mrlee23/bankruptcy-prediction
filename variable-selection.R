@@ -5,6 +5,13 @@ library(leaps)
 library(glmnet)
 library(bestglm)
 library(boot)
+
+#' Plot Gen
+#'
+#' Subset selection의 C_p, BIC, AdjR^2 로 plot을 그린다.
+#'
+#' @param regfit regsubsets 으로 적합시킨 객체
+#' @param output.file plot을 저장할 파일
 plot.gen <- function (regfit, output.file) {
     regfit.summary = summary(regfit)
     png(output.file)
@@ -21,6 +28,12 @@ plot.gen <- function (regfit, output.file) {
 
     dev.off()
 }
+
+#' Coef Print
+#'
+#' Subset selection의 C_p, BIC, AdjR^2의 최적화된 계수를 프린트한다.
+#'
+#' @param regfit regsubsets 으로 적합시킨 객체
 coef.print <- function (regfit) {
     regfit.summary = summary(regfit)
     print("C_p")
@@ -33,32 +46,43 @@ coef.print <- function (regfit) {
     print(which.max(regfit.summary$adjr2))
     print(coef(regfit,which.max(regfit.summary$adjr2)))
 }
-subset.simple <- function (data, method=NULL) {
-    if (is.null(method)) {
-        return(regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data))
-    } else {
-        return(regsubsets(BANKRUPTCY ~ ., nvmax=dim(data)[2], data=data, method=method))
-    }
-}
-#' Modified for logistic. These codes are from https://github.com/yufree/democode
-#' Currently not use this function.
-predict.regsubsets <- function(coef, newdata) {
-    form  <-  as.formula(~.)
-    mat  <-  model.matrix(form, newdata)
-    xvars  <-  names(coef)
-    res = mat[, xvars] %*% coef
-    res = exp(res)/(1+exp(res))
-    return(res)
-}
+
+#' Clear Names
+#'
+#' 질적 Class에 따라 변수로 나눠진 변수를 하나의 변수로 만들어 반환
+#'
+#' @param names 변수 이름을 담고 있는 vector
+#'
+#' @return Unique한 변수 이름 vector
 clear.names <- function (names) {
     if (names[1] == "(Intercept)") {
         names = names[-1]
     }
     return(unique(gsub("[a-z]*", "", names[-1])))
 }
+
+#' Gen Formula
+#'
+#' 변수를 이용해서 glm에서 사용할 Formula을 생성한다.
+#'
+#' @param vars 사용할 변수 vector
+#' @param y 반응변수로 사용할 변수
+#'
+#' @return formula 반환
 gen.formula <- function (vars, y) {
     as.formula(paste(y, "~", paste(clear.names(vars), collapse="+")))
 }
+
+#' Error Glm
+#'
+#' glm의 오분류율을 반환
+#'
+#' @param formula 사용할 formula
+#' @param train.data 트레이닝할 데이터
+#' @param test.data 테스트할 데이터
+#' @param thresh Threshold 설정(로지스틱)
+#'
+#' @return 오분류율 반환
 error.glm <- function (formula, train.data, test.data, thresh) {
     glm.fit = glm(formula, data=train.data, family="binomial")
     glm.res = predict(glm.fit, data=test.data, type="response")
@@ -67,6 +91,17 @@ error.glm <- function (formula, train.data, test.data, thresh) {
     glm.pred[glm.res>thresh] = "YES"
     return(mean(glm.pred != test.data$BANKRUPTCY))
 }
+
+#' Error CV
+#'
+#' Validation set approach의 오분류율을 반환
+#'
+#' @param formula 사용할 formula
+#' @param data 사용할 데이터
+#' @param thresh 로지스틱 Threshold
+#' @param seed.num 같은 샘플을 사용하기 위해서 set.seed에서 사용할 번호
+#'
+#' @return 오분류율 반환
 error.cv <- function (formula, data, thresh, seed.num) {
     data.len = length(data[,1])
     set.seed(seed.num)
@@ -76,6 +111,18 @@ error.cv <- function (formula, data, thresh, seed.num) {
 
     return(error.glm(formula, train.data, test.data, thresh))
 }
+
+#' Error LOOCV
+#'
+#' Validation set approach의 오분류율을 반환
+#'
+#' @param formula 사용할 formula
+#' @param data 사용할 데이터
+#' @param k=100 LOOCV로 사용할 K값(데이터가 많을 경우 설정해놓는 것이 LOOCV와 비슷한 효과를 가지면서 Computation 시간을 줄일 수 있음. k-fold와 동일)
+#' @param thresh 로지스틱 Threshold
+#' @param seed.num 같은 샘플을 사용하기 위해서 set.seed에서 사용할 번호
+#'
+#' @return 오분류율 반환
 error.loocv <- function (formula, data, k=100, thresh, seed.num) {
     data.len = length(data[,1])
     CV = c()
@@ -94,6 +141,17 @@ error.loocv <- function (formula, data, k=100, thresh, seed.num) {
     }
     return(mean(CV))
 }
+
+#' Subset CV
+#'
+#' regsubsets로 적합시킨 객체를 이용해 Cross-validation(Validatin-set approach, LOOCV, 10-fold)를 구한다.
+#'
+#' @param regfit regsubsets로 적합시킨 객체
+#' @param data 사용할 데이터
+#' @param thresh Threshold
+#' @param seed.num 샘플 시드넘버
+#'
+#' @return C_p, BIC, AdjR^2의 CV, LOOCV, 10-fold 값
 subset.cv <- function (regfit, data, thresh, seed.num) {
     LOOCV_K = 200
     
@@ -128,6 +186,17 @@ subset.cv <- function (regfit, data, thresh, seed.num) {
     rownames(result) <- c("cv", "loocv", "10-fold")
     return(result)
 }
+
+#' Cross Validation
+#'
+#' subset.CV를 일반화한 함수
+#'
+#' @param vars 사용할 변수(반응 변수는 BANKRUPTCY로 설정되어 있음(data dependency 있음))
+#' @param data 사용할 데이터
+#' @param thresh Threshold
+#' @param seed.num 샘플 시드넘버
+#'
+#' @return CV, LOOCV, 10-fold 값
 cross.validation <- function (vars, data, thresh, seed.num) {
     LOOCV_K = 200
     formula = gen.formula(vars, "BANKRUPTCY")
