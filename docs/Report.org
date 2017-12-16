@@ -225,11 +225,38 @@ Cross-validation 방법으로 Validation set approach, LOOCV, 10-fold 등 세가
 모든 Cross-validation 방법은 가장 처음에 training 데이터를 만들 때 sample 함수를 이용해 무작위로 만든 다음 진행한다.
 다른 모델들 비교시 같은 sample을 사용하기 위해서 동일한 시드 번호를 정해 set.seed를 통해 꼭 training sample을 고정시키고 진행하였다.
 
-이 단계에서는 Subset selection의 세가지 방법의 Cross-validation을 비교하고 그 중 가장 오류율이 적게 나온
+이 단계에서는 Subset selection의 세가지 방법의 Cross-validation을 비교하고 그 중 가장 오류율이 적게 나온 방법과 Ridge, Lasso의 Cross-validation 오분류율을 각각 구하고 가장 낮은 오분류율을 가지는 모델을 최종 모델로 선택한다.
 
-앞서 변수 선택 단계에서 Subset selection 방법을 사용하여 나온 변수들은 Best subset, Forward selection, Backward selection 세가지 방법이 모두 동일한 변수를 선택하였으므로, 대표로 Best subset을 사용하여 Ridge, Lasso를 비교하였다.
+*** Subset selection 비교
 
+#+CAPTION: Best subset으로 선택된 변수를 이용한 Cross-validation 오분류율
+|                         |        C_p |        BIC |     AdjR^2 |
+|-------------------------+------------+------------+------------|
+| Validation set approach | 0.05121746 | 0.05289673 | 0.05625525 |
+| LOOCV                   | 0.05282276 | 0.04977804 | 0.05533741 |
+| 10-fold                 | 0.05415730 | 0.05005212 | 0.05681556 |
 
+#+CAPTION: Forward selection으로 선택된 변수를 이용한 Cross-validation 오분류율
+|                         |        C_p |        BIC |     AdjR^2 |
+|-------------------------+------------+------------+------------|
+| Validation set approach | 0.05121746 | 0.05289673 | 0.05625525 |
+| LOOCV                   | 0.05282276 | 0.04977804 | 0.05533741 |
+| 10-fold                 | 0.05415730 | 0.05005212 | 0.05681556 |
+
+#+CAPTION: Backward selection으로 선택된 변수를 이용한 Cross-validation 오분류율
+|                         |        C_p |        BIC |     AdjR^2 |
+|-------------------------+------------+------------+------------|
+| Validation set approach | 0.05121746 | 0.05289673 | 0.05625525 |
+| LOOCV                   | 0.05282276 | 0.04977804 | 0.05533741 |
+| 10-fold                 | 0.05415730 | 0.05005212 | 0.05681556 |
+
+#+CAPTION: Subset selection 결과 그래프
+[[../plots/variable-selection-full.png]]
+
+Best subset, Forward selection, Backward selection 세가지 방법이 모두 동일한 변수를 선택하였으므로 세가지 Cross-validation 오분류율 역시 동일하게 나왔다.
+따라서 Ridge, Lasso와 함께 비교할 Subset selection 방법은 Best subset으로 선택한다.
+
+*** Ridge, Lasso 비교
 ** 3.4. Bootstrap
 
 ** 3.5. 분류 방법 비교
