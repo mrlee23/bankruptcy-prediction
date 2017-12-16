@@ -151,7 +151,7 @@ coef.print(regfit.bwd)
 
 result.full = subset.cv(regfit.full, data, 0.1, 15)
 result.fwd = subset.cv(regfit.fwd, data, 0.1, 15)
-result.bwd = subset.cv(regfit.bwd, data, 0.05, 15)
+result.bwd = subset.cv(regfit.bwd, data, 0.1, 15)
 
 result=result.full
 png('./plots/variable-selection-full.png')
@@ -170,7 +170,7 @@ dev.off()
 
 result=result.bwd
 png('./plots/variable-selection-bwd.png')
-as.matrix(result)
+as.matrix(result)*ㄲ
 matplot(as.matrix(result), type = c("b"),pch=1,col = 2:4)
 legend("topright", legend = c("C_p", "BIC", "AdjR^2"), col=2:4, pch=1)
 dev.off()
@@ -181,4 +181,3 @@ mat = as.matrix(cbind(as.matrix(result), t(ridge.result), t(lasso.result)))
 matplot(mat, type = c("b"),pch=1,col = 2:6)
 legend("topright", legend = c("C_p", "BIC", "AdjR^2", "Ridge", "Lasso"), col=2:6, pch=1)
 dev.off()
-
