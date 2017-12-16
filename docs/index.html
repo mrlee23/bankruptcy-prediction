@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>R을 활용한 기업 부도 분석 및 예측 보고서</title>
-<!-- 2017-12-16 토 22:54 -->
+<!-- 2017-12-17 일 07:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="DongSoo Lee" />
@@ -176,7 +176,7 @@ for the JavaScript code in this tag.
 </ul>
 </li>
 <li><a id="toc-5" href="#sec-5">4. 결론</a></li>
-<li><a id="toc-6" href="#sec-6">5. 참고 자료</a></li>
+<li><a id="toc-6" href="#sec-6">5. 참고 문헌</a></li>
 </ul>
 </div>
 </div>
@@ -1427,51 +1427,205 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-4' /* id */);
 <p>
 마지막으로 이번 단계에서는 최종 선택된 모델을 이용해 반응변수를 BANKRUPTCY 로, 독립변수를 SIZE, DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL, AUDITED 로 설정하여
 Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분류하고, 어떤 방법이 가장 예측을 잘하는지 비교하였다.
-먼저 training 데이터와 test 데이터를 7:3의 비율로 랜덤하게 설정하여 진행하였다.
+먼저 training 데이터와 test 데이터를 5:5의 비율로 랜덤하게 설정하여 진행하였다.
 </p>
-</div>
 
-<div id="outline-container-sec-4-5-1" class="outline-4">
-<h4 id="sec-4-5-1">Logistic regression</h4>
-<div class="outline-text-4" id="text-4-5-1">
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 12:</span> Logistic regression 예측 표</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Logistic</th>
+<th scope="col" class="right">NO</th>
+<th scope="col" class="right">YES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">NO</td>
+<td class="right">1126</td>
+<td class="right">15</td>
+</tr>
+
+<tr>
+<td class="left">YES</td>
+<td class="right">39</td>
+<td class="right">11</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 13:</span> LDA 예측 표</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">LDA</th>
+<th scope="col" class="right">NO</th>
+<th scope="col" class="right">YES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">NO</td>
+<td class="right">1141</td>
+<td class="right">19</td>
+</tr>
+
+<tr>
+<td class="left">YES</td>
+<td class="right">24</td>
+<td class="right">7</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 14:</span> QDA 예측 표</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">QDA</th>
+<th scope="col" class="right">NO</th>
+<th scope="col" class="right">YES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">NO</td>
+<td class="right">1104</td>
+<td class="right">16</td>
+</tr>
+
+<tr>
+<td class="left">YES</td>
+<td class="right">61</td>
+<td class="right">10</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 15:</span> KNN(K=3) 예측 표</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">KNN(K=3)</th>
+<th scope="col" class="right">NO</th>
+<th scope="col" class="right">YES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">NO</td>
+<td class="right">1162</td>
+<td class="right">21</td>
+</tr>
+
+<tr>
+<td class="left">YES</td>
+<td class="right">3</td>
+<td class="right">5</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 16:</span> 오분류율 비교</caption>
+
+<colgroup>
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">Logistic</th>
+<th scope="col" class="right">LDA</th>
+<th scope="col" class="right">QDA</th>
+<th scope="col" class="right">KNN(K=3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">0.04534005</td>
+<td class="right">0.03610411</td>
+<td class="right">0.06465155</td>
+<td class="right">0.02015113</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 17:</span> 기업 부도 예측 성공율</caption>
+
+<colgroup>
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">Logistic</th>
+<th scope="col" class="right">LDA</th>
+<th scope="col" class="right">QDA</th>
+<th scope="col" class="right">KNN(K=3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">0.4230769</td>
+<td class="right">0.2692308</td>
+<td class="right">0.3846154</td>
+<td class="right">0.1923077</td>
+</tr>
+</tbody>
+</table></div>
+
+
 <p>
-Threshold를 0.1로 설정한 후 분석을 진행하였다.
+오분류율이 가장 낮은 분류방법은 KNN 으로 오분류율이 약 2%로 나타났다. 하지만 KNN의 경우 기업 부도 예측 성공을이 19%로 가장 낮았다.
+반면 Logistic, QDA 은 오분류율이 4.5%, 6.5%로 KNN 보단 조금 높지만, 기업 부도 예측 성공율이 Logistic은 42%, QDA는 38%로 KNN의 19%보다 월등히 높은 것을 알 수 있었다.
+본 연구의 궁극적인 목표는 기업 부도 가능성을 정확히 예측하는 것이므로 이에 해당하는 Logistic과 QDA가 LDA, KNN보다 더 좋은 분류 방법이라는 것을 알 수 있다.
+더 나아가서 Logistic과 QDA를 비교하면 Logistic은 QDA보다 오분류율이 낮으면서 동시에 기업 부도 예측 성공율이 더 높기 때문에 Logistic, LDA, QDA, KNN 중 가장 좋은 분류 방법은 Logistic 이라는 것을 알 수 있다.
 </p>
-
-<pre class="example">
-                                  Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                     -2.545e+00  7.867e-01  -3.235 0.001215 ** 
-SIZEmedium                      -7.871e-01  6.684e-01  -1.178 0.238976    
-SIZEsmall                       -1.455e+00  6.934e-01  -2.098 0.035893 *  
-DEBT_COST                       -4.603e-01  1.241e-01  -3.710 0.000207 ***
-RETURN_EQUITY                   -6.264e-06  1.901e-05  -0.330 0.741745    
-RETURN_ASSETS                   -1.388e-02  3.836e-03  -3.619 0.000296 ***
-NUMBER_JUDICIAL_INCIDENCES_YEAR  2.679e+00  5.619e-01   4.768 1.86e-06 ***
-SPENT_JUDICIAL_INCIDENCES_TOTAL  6.272e-06  4.661e-06   1.346 0.178416    
-AUDITEDyes                       1.187e+00  4.754e-01   2.498 0.012492 *
-</pre>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-5-1' /* id */);
-</script>
-
-<div id="outline-container-sec-4-5-2" class="outline-4">
-<h4 id="sec-4-5-2">LDA</h4>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-5-2' /* id */);
-</script>
-
-<div id="outline-container-sec-4-5-3" class="outline-4">
-<h4 id="sec-4-5-3">QDA</h4>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-5-3' /* id */);
-</script>
-
-<div id="outline-container-sec-4-5-4" class="outline-4">
-<h4 id="sec-4-5-4">KNN</h4>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-5-4' /* id */);
-</script>
 </div><script type="text/javascript">
 org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-5' /* id */);
 </script>
@@ -1479,18 +1633,25 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-5' /* id */);
 org_blog_callback('outline_2'/* type */, 'outline-container-sec-4' /* id */);
 </script>
 
-
 <div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5">4. 결론</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+본 연구의 목적인 기업의 부도 가능성을 정확하게 예측하기 위해서 Best subset, Ridge regression, Lasso 등을 이용해 변수선택을 한 후 Cross-validation을 이용해 최적의 모델을 선택한 후 Logistic regression, LDA, QDA, KNN 등의 분류방법을 시행하였다.
+최적의 모델은 SIZE, DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL, AUDITED 의 변수를 사용한 모델이었다.
+이 모델을 사용하여 분류 방법들 간의 예측율 및 오분류율을 비교한 결과 Logistic regression이 기업 부도 예측 성공률이 가장 높으면서도 동시에 비슷한 예측 성공률을 가지는 QDA 보다 오분류율이 낮음으로써 본 연구의 목적에 가장 잘 부합하는 분류 방법이라는 결론을 얻게 되었다.
+</p>
+</div>
 </div><script type="text/javascript">
 org_blog_callback('outline_2'/* type */, 'outline-container-sec-5' /* id */);
 </script>
 
 <div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">5. 참고 자료</h2>
+<h2 id="sec-6">5. 참고 문헌</h2>
 <div class="outline-text-2" id="text-6">
 <ul class="org-ul">
-<li></li>
+<li>Gareth James. (2003). An Introduction to Statistical Learning with Applications in R, Springer
+</li>
 </ul>
 </div>
 </div><script type="text/javascript">
@@ -1517,8 +1678,8 @@ org_blog_callback('footnote'/* type */, 'footnotes' /* id */);
 <p class="author">작성자 : DongSoo Lee</p>
 <p class="email">이메일 : <a href="mailto:mrlee_23@naver.com">mrlee_23@naver.com</a></p>
 <p class="date">생성일 : 2017-12-16</p>
-<p class="datetime">수정일 : 2017-12-16 토 22:37</p>
-<p class="datetime">송고일 : 2017-12-16 토 22:54</p>
+<p class="datetime">수정일 : 2017-12-17 일 07:49</p>
+<p class="datetime">송고일 : 2017-12-17 일 07:49</p>
 </div>
 <script type="text/javascript">
 org_blog_callback('postamble'/* type */, 'postamble' /* id */);

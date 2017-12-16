@@ -17,7 +17,7 @@ summary(glm.fit2)
 
 glm.prob=predict(glm.fit2,data.train,type="response")
 glm.pred=rep("NO",dim(data.train)[1])
-glm.pred[glm.prob>.1]="YES" 
+glm.pred[glm.prob>.0715]="YES" 
 table(glm.pred,BANKRUPTCY.test)
 mean(glm.pred!=BANKRUPTCY.test)
 
@@ -41,10 +41,11 @@ lda.fit=lda(BANKRUPTCY ~ SIZE + DEBT_COST + RETURN_EQUITY
 
 lda.pred=predict(lda.fit, data.train)
 names(lda.pred)
+summary(lda.fit)
 lda.class=lda.pred$class
 table(lda.class,BANKRUPTCY.test)
 mean(lda.class!=BANKRUPTCY.test)
-
+plot(lda.class)
 #QDA
 qda.fit=qda(BANKRUPTCY ~ SIZE + DEBT_COST + RETURN_EQUITY 
             + RETURN_ASSETS + NUMBER_JUDICIAL_INCIDENCES_YEAR 
@@ -54,6 +55,7 @@ qda.fit=qda(BANKRUPTCY ~ SIZE + DEBT_COST + RETURN_EQUITY
 qda.class=predict(qda.fit,data.train)$class
 table(qda.class,BANKRUPTCY.test)
 mean(qda.class!=BANKRUPTCY.test)
+plot(qda.class)
 
 #KNN
 library(class)
@@ -68,8 +70,8 @@ train.BANKRUPTCY=BANKRUPTCY[train]
 
 set.seed(1)
 
-means=rep(0,10)
-for (i in 1:10) {
+means=rep(0,30)
+for (i in 1:30) {
   knn.pred=knn(train.X,test.X,train.BANKRUPTCY,k=i)
   print(table(knn.pred,BANKRUPTCY.test))
   mean=mean(knn.pred!=BANKRUPTCY.test)
@@ -77,7 +79,7 @@ for (i in 1:10) {
   means[i]=mean;
 }
 min(means)
-
+?table
 plot(means)
 
 

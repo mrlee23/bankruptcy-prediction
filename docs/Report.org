@@ -300,36 +300,55 @@ Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best s
 ** 3.5. 분류 방법 비교
 마지막으로 이번 단계에서는 최종 선택된 모델을 이용해 반응변수를 BANKRUPTCY 로, 독립변수를 SIZE, DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL, AUDITED 로 설정하여
 Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분류하고, 어떤 방법이 가장 예측을 잘하는지 비교하였다.
-먼저 training 데이터와 test 데이터를 7:3의 비율로 랜덤하게 설정하여 진행하였다.
+먼저 training 데이터와 test 데이터를 5:5의 비율로 랜덤하게 설정하여 진행하였다.
 
-*** Logistic regression
+#+CAPTION: Logistic regression 예측 표
+| Logistic |   NO | YES |
+|----------+------+-----|
+| NO       | 1126  | 15|
+| YES      |   39  | 11|
+  
+#+CAPTION: LDA 예측 표
+| LDA |   NO | YES |
+|-----+------+-----|
+| NO  | 1141 |  19 |
+| YES |   24 |   7 |
 
-Threshold를 0.1로 설정한 후 분석을 진행하였다.
+#+CAPTION: QDA 예측 표
+| QDA |   NO | YES |
+|-----+------+-----|
+| NO  | 1104 |  16 |
+| YES |   61 |  10 |
 
-#+BEGIN_EXAMPLE
-                                  Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                     -2.545e+00  7.867e-01  -3.235 0.001215 ** 
-SIZEmedium                      -7.871e-01  6.684e-01  -1.178 0.238976    
-SIZEsmall                       -1.455e+00  6.934e-01  -2.098 0.035893 *  
-DEBT_COST                       -4.603e-01  1.241e-01  -3.710 0.000207 ***
-RETURN_EQUITY                   -6.264e-06  1.901e-05  -0.330 0.741745    
-RETURN_ASSETS                   -1.388e-02  3.836e-03  -3.619 0.000296 ***
-NUMBER_JUDICIAL_INCIDENCES_YEAR  2.679e+00  5.619e-01   4.768 1.86e-06 ***
-SPENT_JUDICIAL_INCIDENCES_TOTAL  6.272e-06  4.661e-06   1.346 0.178416    
-AUDITEDyes                       1.187e+00  4.754e-01   2.498 0.012492 *  
-#+END_EXAMPLE
+#+CAPTION: KNN(K=3) 예측 표
+| KNN(K=3) |   NO | YES |
+|----------+------+-----|
+| NO       | 1162 |  21 |
+| YES      |    3 |   5 |
 
-*** LDA
+#+CAPTION: 오분류율 비교
+|   Logistic |        LDA |        QDA |    KNN(K=3) |
+|------------+------------+------------+------------|
+| 0.04534005 | 0.03610411 | 0.06465155 | 0.02015113 |
 
-*** QDA
+#+CAPTION: 기업 부도 예측 성공율
+|  Logistic |       LDA |       QDA |   KNN(K=3) |
+|-----------+-----------+-----------+------------|
+| 0.4230769 | 0.2692308 | 0.3846154 | 0.1923077 |
 
-*** KNN
 
+오분류율이 가장 낮은 분류방법은 KNN 으로 오분류율이 약 2%로 나타났다. 하지만 KNN의 경우 기업 부도 예측 성공을이 19%로 가장 낮았다.
+반면 Logistic, QDA 은 오분류율이 4.5%, 6.5%로 KNN 보단 조금 높지만, 기업 부도 예측 성공율이 Logistic은 42%, QDA는 38%로 KNN의 19%보다 월등히 높은 것을 알 수 있었다.
+본 연구의 궁극적인 목표는 기업 부도 가능성을 정확히 예측하는 것이므로 이에 해당하는 Logistic과 QDA가 LDA, KNN보다 더 좋은 분류 방법이라는 것을 알 수 있다.
+더 나아가서 Logistic과 QDA를 비교하면 Logistic은 QDA보다 오분류율이 낮으면서 동시에 기업 부도 예측 성공율이 더 높기 때문에 Logistic, LDA, QDA, KNN 중 가장 좋은 분류 방법은 Logistic 이라는 것을 알 수 있다.
 
 * 4. 결론
+본 연구의 목적인 기업의 부도 가능성을 정확하게 예측하기 위해서 Best subset, Ridge regression, Lasso 등을 이용해 변수선택을 한 후 Cross-validation을 이용해 최적의 모델을 선택한 후 Logistic regression, LDA, QDA, KNN 등의 분류방법을 시행하였다.
+최적의 모델은 SIZE, DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL, AUDITED 의 변수를 사용한 모델이었다.
+이 모델을 사용하여 분류 방법들 간의 예측율 및 오분류율을 비교한 결과 Logistic regression이 기업 부도 예측 성공률이 가장 높으면서도 동시에 비슷한 예측 성공률을 가지는 QDA 보다 오분류율이 낮음으로써 본 연구의 목적에 가장 잘 부합하는 분류 방법이라는 결론을 얻게 되었다.
 
-* 5. 참고 자료
--
+* 5. 참고 문헌
+- Gareth James. (2003). An Introduction to Statistical Learning with Applications in R, Springer
 
 * Footnotes
 
