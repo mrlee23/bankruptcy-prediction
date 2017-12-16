@@ -5,13 +5,13 @@
 #+AUTHOR: DongSoo Lee
 #+EMAIL: mrlee_23@naver.com
 
-- [[https://github.com/mrlee23/bankruptcy-prediction][Github]]
-- [[https://mrlee23.github.io/bankruptcy-prediction/][Github page]]
-- [[https://mrlee23.github.io/bankruptcy-prediction/docs/][Github page - report]]
-
 * 개요
 이 프로젝트는 [[https://github.com/amorag/Bankruptcy_2016][Bankruptcy_2016]]의
 데이터를 이용하여 1998년부터 2003년까지 약 3000개의 기업에 대한 정보를 분석하고 부도 여부를 예측하는 것을 목표로 한다.
+
+- [[https://github.com/mrlee23/bankruptcy-prediction][Github]]
+- [[https://mrlee23.github.io/bankruptcy-prediction/][Github page]]
+- [[https://mrlee23.github.io/bankruptcy-prediction/docs/][Github page - report]]
 
 * 목적과 목표
 기업별 재무재표와 상태 정보등을 이용한 분석을 통해 기업 부도에 영향을 미치는 변수들을 선택하고 모수들을 추정해 적합한 통계적 모델을 찾는 것을 목적으로 한다.
