@@ -192,7 +192,7 @@ Best subset, Forward selection, Backward selection 세 방법 모두 C_p, BIC, A
 
 *** Ridge regression, Lasso
 Ridge regression과 Lasso는 먼저 \lambda 를 정해야 한다.
-따라서 \lambda 를 정하는 방법으로 R의 glmnet 패키지의 cv.glmnet 을 이용하여 최적의 \lambda 를 구하였다.[fn:4]
+따라서 \lambda 를 정하는 방법으로 R의 glmnet 패키지의 cv.glmnet 을 이용하여 최적의 \lambda 를 구하였다.[fn:3]
 
 #+CAPTION: Ridge regression
 [[../plots/ridge.png]]
@@ -285,6 +285,7 @@ Best subset, Forward selection, Backward selection 세가지 방법이 모두 �
 Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best subset의 BIC 방법으로 선택된 변수를 이용한 모델의 오분류율이 0.04977804로 가장 낮게 나왔다.
 따라서 최종 모델로 선택된 변수들은 아래의 표와 같다.
 
+#+CAPTION: 최종 모델
 | 변수 이름                       | 범위                | 설명           |
 |---------------------------------+---------------------+----------------|
 | SIZE                            | small, medium, big  | 기업의 크기    |

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>R을 활용한 기업 부도 분석 및 예측 보고서</title>
-<!-- 2017-12-17 일 07:49 -->
+<!-- 2017-12-17 일 08:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="DongSoo Lee" />
@@ -946,7 +946,7 @@ org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-1' /* id */)
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 Ridge regression과 Lasso는 먼저 &lambda; 를 정해야 한다.
-따라서 &lambda; 를 정하는 방법으로 R의 glmnet 패키지의 cv.glmnet 을 이용하여 최적의 &lambda; 를 구하였다.
+따라서 &lambda; 를 정하는 방법으로 R의 glmnet 패키지의 cv.glmnet 을 이용하여 최적의 &lambda; 를 구하였다.<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>
 </p>
 
 
@@ -1347,7 +1347,7 @@ Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best s
 </p>
 
 <div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
+<caption class="t-above"><span class="table-number">Table 12:</span> 최종 모델</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1427,11 +1427,11 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-4' /* id */);
 <p>
 마지막으로 이번 단계에서는 최종 선택된 모델을 이용해 반응변수를 BANKRUPTCY 로, 독립변수를 SIZE, DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL, AUDITED 로 설정하여
 Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분류하고, 어떤 방법이 가장 예측을 잘하는지 비교하였다.
-먼저 training 데이터와 test 데이터를 5:5의 비율로 랜덤하게 설정하여 진행하였다.
+먼저 training 데이터와 test 데이터를 5:5의 비율로 랜덤하게 설정하여 진행하였다.<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup>
 </p>
 
 <div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 12:</span> Logistic regression 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 13:</span> Logistic regression 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1463,7 +1463,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table></div>
 
 <div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 13:</span> LDA 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 14:</span> LDA 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1495,7 +1495,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table></div>
 
 <div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 14:</span> QDA 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 15:</span> QDA 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1527,7 +1527,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table></div>
 
 <div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 15:</span> KNN(K=3) 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 16:</span> KNN(K=3) 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1559,7 +1559,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table></div>
 
 <div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 16:</span> 오분류율 비교</caption>
+<caption class="t-above"><span class="table-number">Table 17:</span> 오분류율 비교</caption>
 
 <colgroup>
 <col  class="right" />
@@ -1589,7 +1589,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table></div>
 
 <div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 17:</span> 기업 부도 예측 성공율</caption>
+<caption class="t-above"><span class="table-number">Table 18:</span> 기업 부도 예측 성공율</caption>
 
 <colgroup>
 <col  class="right" />
@@ -1666,7 +1666,15 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-6' /* id */);
 </p></div>
 
 <div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
-해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R 에서 확인할 수 있다.
+해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R 에 있다.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
+해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/ridge.R 에 있다.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
+해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/classification.R 에 있다.
 </p></div>
 
 
@@ -1678,8 +1686,8 @@ org_blog_callback('footnote'/* type */, 'footnotes' /* id */);
 <p class="author">작성자 : DongSoo Lee</p>
 <p class="email">이메일 : <a href="mailto:mrlee_23@naver.com">mrlee_23@naver.com</a></p>
 <p class="date">생성일 : 2017-12-16</p>
-<p class="datetime">수정일 : 2017-12-17 일 07:49</p>
-<p class="datetime">송고일 : 2017-12-17 일 07:49</p>
+<p class="datetime">수정일 : 2017-12-17 일 08:25</p>
+<p class="datetime">송고일 : 2017-12-17 일 08:49</p>
 </div>
 <script type="text/javascript">
 org_blog_callback('postamble'/* type */, 'postamble' /* id */);
