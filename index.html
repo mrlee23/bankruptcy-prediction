@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>스페인 기업 부도 분석 및 예측</title>
-<!-- 2017-12-07 Thu 12:36 -->
+<!-- 2017-12-16 토 17:56 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="LeeDongSoo" />
+<meta  name="author" content="DongSoo Lee" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -88,6 +88,7 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<link href="./static/org-spec.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -134,6 +135,48 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="content">
@@ -152,7 +195,19 @@ for the JavaScript code in this tag.
 </li>
 <li><a id="toc-4" href="#sec-4">4. 분석 과정</a>
 <ul>
-<li><a id="toc-4-1" href="#sec-4-1">4.1. 로지스틱 회귀분석</a></li>
+<li><a id="toc-4-1" href="#sec-4-1">4.1. 데이터 설정</a></li>
+<li><a id="toc-4-2" href="#sec-4-2">4.2. 변수 선택</a>
+<ul>
+<li><a id="toc-4-2-1" href="#sec-4-2-1">4.2.1. Best subset</a></li>
+<li><a id="toc-4-2-2" href="#sec-4-2-2">4.2.2. Forward</a></li>
+<li><a id="toc-4-2-3" href="#sec-4-2-3">4.2.3. Backward</a></li>
+<li><a id="toc-4-2-4" href="#sec-4-2-4">4.2.4. 결과</a></li>
+<li><a id="toc-4-2-5" href="#sec-4-2-5">4.2.5. Shrinkage Methods(Ridge, Lasso)</a></li>
+</ul>
+</li>
+<li><a id="toc-4-3" href="#sec-4-3">4.3. 최종 모델 선택</a></li>
+<li><a id="toc-4-4" href="#sec-4-4">4.4. 분류 방법 비교</a></li>
+<li><a id="toc-4-5" href="#sec-4-5">4.5. Bootstrap</a></li>
 </ul>
 </li>
 </ul>
@@ -232,19 +287,19 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-2' /* id */);
 <tr>
 <td class="left">SOCIAL<sub>CODE</sub></td>
 <td class="left">Co, Ltd, other</td>
-<td class="left">SOCIAL CODE OF THE COMPANY</td>
+<td class="left">기업 형태</td>
 </tr>
 
 <tr>
 <td class="left">LINKED<sub>GROUP</sub></td>
 <td class="left">no, yes</td>
-<td class="left">LINKED TO A GROUP</td>
+<td class="left">그룹 여부</td>
 </tr>
 
 <tr>
 <td class="left">PROVINCE<sub>CODE</sub></td>
 <td class="left">1..52(4,5,19,34,42,44,51 제외)</td>
-<td class="left">CODE OF PROVINCE</td>
+<td class="left">지방 코드</td>
 </tr>
 
 <tr>
@@ -256,19 +311,19 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-2' /* id */);
 <tr>
 <td class="left">AUDITED</td>
 <td class="left">no, yes</td>
-<td class="left">AUDITED</td>
+<td class="left">감사 여부</td>
 </tr>
 
 <tr>
 <td class="left">AUDITORS<sub>OPINION</sub></td>
 <td class="left">nothing, positive, minor, negative</td>
-<td class="left">OPINION OF THE AUDITORY</td>
+<td class="left">감사원 의견</td>
 </tr>
 
 <tr>
 <td class="left">BANKRUPTCY</td>
 <td class="left">NO, YES</td>
-<td class="left">FINANCIAL FAILURE</td>
+<td class="left">부도 여부</td>
 </tr>
 </tbody>
 </table></div>
@@ -293,165 +348,165 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-1' /* id */);
 <thead>
 <tr>
 <th scope="col" class="left">변수 이름</th>
-<th scope="col" class="left">타입</th>
+<th scope="col" class="left">범위</th>
 <th scope="col" class="left">설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="left">YEAR</td>
-<td class="left">integer</td>
-<td class="left">FISCAL YEAR</td>
+<td class="left">1998 ~ 2003</td>
+<td class="left">기록 연도</td>
 </tr>
 
 <tr>
 <td class="left">NUMBER<sub>EMPLOYEES</sub></td>
-<td class="left">integer</td>
-<td class="left">NUMBER OF EMPLOYEES</td>
+<td class="left">0 ~ 2662</td>
+<td class="left">직원 수</td>
 </tr>
 
 <tr>
 <td class="left">AGE</td>
-<td class="left">integer</td>
-<td class="left">AGE</td>
+<td class="left">0 ~ 85</td>
+<td class="left">기업 연수</td>
 </tr>
 
 <tr>
 <td class="left">NUMBER<sub>PARTNERS</sub></td>
-<td class="left">integer</td>
-<td class="left">NUMBER OF PARTNERS</td>
+<td class="left">0 ~ 75</td>
+<td class="left">협력 기업 수</td>
 </tr>
 
 <tr>
 <td class="left">CHANGES<sub>LOCATION</sub></td>
-<td class="left">integer</td>
-<td class="left">NUMBER OF CHANGES OF LOCATION</td>
+<td class="left">0 ~ 8</td>
+<td class="left">기업 위치 변경 수</td>
 </tr>
 
 <tr>
 <td class="left">DEBT<sub>STRUCTURE</sub></td>
-<td class="left">numeric</td>
-<td class="left">DEBT STRUCTURE</td>
+<td class="left">-99.07 ~ 134.48</td>
+<td class="left">부채 구조</td>
 </tr>
 
 <tr>
 <td class="left">DEBT<sub>COST</sub></td>
-<td class="left">numeric</td>
-<td class="left">DEBT COST</td>
+<td class="left">-0.87 ~ 8151.25</td>
+<td class="left">부채 비용</td>
 </tr>
 
 <tr>
 <td class="left">DEBT<sub>PAYING</sub><sub>AVAILABILITY</sub></td>
-<td class="left">numeric</td>
-<td class="left">DEBT PAYING AVAILABILITY</td>
+<td class="left">-7.27 ~ 345.05</td>
+<td class="left">부채 지불 능력</td>
 </tr>
 
 <tr>
 <td class="left">DEBT<sub>RATIO</sub></td>
-<td class="left">numeric</td>
-<td class="left">DEBT RATIO</td>
+<td class="left">-43094.47 ~ 17570.04</td>
+<td class="left">부채 비율</td>
 </tr>
 
 <tr>
 <td class="left">WORKING<sub>CAPITAL</sub></td>
-<td class="left">numeric</td>
-<td class="left">WORKING CAPITAL</td>
+<td class="left">-14.92 ~ 24.23</td>
+<td class="left">순운전(운영)자본</td>
 </tr>
 
 <tr>
 <td class="left">WARRANTY</td>
-<td class="left">numeric</td>
+<td class="left">-526.22 ~ 46836.93</td>
 <td class="left">WARRANTY</td>
 </tr>
 
 <tr>
 <td class="left">OPERATING<sub>INCOME</sub><sub>MARGIN</sub></td>
-<td class="left">numeric</td>
-<td class="left">OPERATING INCOME MARGIN</td>
+<td class="left">-45180.9 ~ 8791.51</td>
+<td class="left">영업이익률</td>
 </tr>
 
 <tr>
 <td class="left">RETURN<sub>OPERATING</sub><sub>ASSETS</sub></td>
-<td class="left">numeric</td>
-<td class="left">RETURN ON OPERATING ASSETS</td>
+<td class="left">-68775792 ~ 2885.159</td>
+<td class="left">운용자산순환률</td>
 </tr>
 
 <tr>
 <td class="left">RETURN<sub>EQUITY</sub></td>
-<td class="left">numeric</td>
-<td class="left">RETURN ON EQUITY</td>
+<td class="left">-1825426 ~ 9349.018</td>
+<td class="left">자기자본이익률</td>
 </tr>
 
 <tr>
 <td class="left">RETURN<sub>ASSETS</sub></td>
-<td class="left">numeric</td>
-<td class="left">RETURN ON ASSETS</td>
+<td class="left">-481.07 ~ 711.22</td>
+<td class="left">총자산순이익률</td>
 </tr>
 
 <tr>
 <td class="left">STOCK<sub>TURNOVER</sub></td>
-<td class="left">numeric</td>
-<td class="left">STOCK TURNOVER</td>
+<td class="left">-481.08 ~ 711.22</td>
+<td class="left">자본금회전율</td>
 </tr>
 
 <tr>
 <td class="left">ASSET<sub>TURNOVER</sub></td>
-<td class="left">numeric</td>
-<td class="left">ASSET TURNOVER</td>
+<td class="left">-0.33 ~ 112.28</td>
+<td class="left">자산회전율</td>
 </tr>
 
 <tr>
 <td class="left">RECEIVABLE<sub>TURNOVER</sub></td>
-<td class="left">numeric</td>
-<td class="left">RECEIVABLE TURNOVER</td>
+<td class="left">-905.96 ~ 17096.96</td>
+<td class="left">매출채권 회전율</td>
 </tr>
 
 <tr>
 <td class="left">ASSET<sub>ROTATION</sub></td>
-<td class="left">numeric</td>
-<td class="left">ASSET ROTATION</td>
+<td class="left">-60947.59 ~ 90619.69</td>
+<td class="left">자본순환율</td>
 </tr>
 
 <tr>
 <td class="left">FINANCIAL<sub>SOLVENCY</sub></td>
-<td class="left">numeric</td>
-<td class="left">FINANCIAL SOLVENCY (CURRENT RATIO)</td>
+<td class="left">-343.43 ~ 5481.22</td>
+<td class="left">재무건전성</td>
 </tr>
 
 <tr>
 <td class="left">ACID<sub>TEST</sub></td>
-<td class="left">numeric</td>
-<td class="left">ACID TEST</td>
+<td class="left">-315.79 ~ 5268.60</td>
+<td class="left">당좌 비율</td>
 </tr>
 
 <tr>
 <td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
-<td class="left">integer</td>
-<td class="left">HISTORIC NUMBER OF JUDICIAL INCIDENCES</td>
+<td class="left">0 ~ 5</td>
+<td class="left">법적 분쟁 발생 수</td>
 </tr>
 
 <tr>
 <td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
-<td class="left">integer</td>
-<td class="left">NUMBER OF JUDICIAL INCIDENCES (LAST YEAR)</td>
+<td class="left">0 ~ 1</td>
+<td class="left">최근 1년간 법적 분쟁 발생 수</td>
 </tr>
 
 <tr>
 <td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
-<td class="left">numeric</td>
-<td class="left">HISTORIC AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES</td>
+<td class="left">0 ~ 448342.4</td>
+<td class="left">법적 분쟁 부담 비용</td>
 </tr>
 
 <tr>
 <td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
-<td class="left">numeric</td>
-<td class="left">AMOUNT OF MONEY SPENT ON JUDICIAL INCIDENCES (LAST YEAR)</td>
+<td class="left">0 ~ 445476.7</td>
+<td class="left">최근 1년간 법적 부쟁 부담 비용</td>
 </tr>
 
 <tr>
 <td class="left">NUMBER<sub>SERIOUS</sub><sub>INCIDENCES</sub></td>
-<td class="left">integer</td>
-<td class="left">HISTORIC NUMBER OF SERIOUS INCIDENCES</td>
+<td class="left">0 ~ 1</td>
+<td class="left">위험 사고 발생 수</td>
 </tr>
 </tbody>
 </table></div>
@@ -467,87 +522,399 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-3' /* id */);
 <h2 id="sec-4"><a href="#toc-4"><span class="section-number-2">4</span></a> 분석 과정</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-기업 부도 요인을 분석하는 것이 목적이기 때문에 반응변수로 BANKRUPTCY 를 사용한다.
-BANKRUPTCY 는 질적변수로 YES(부도), NO(부도X)로 부도 여부를 나타내는 변수이다.
+기업 부도 요인을 분석하는 것이 목적으로 *BANKRUPTCY* 를 반응변수로 사용한다.
+*BANKRUPTCY* 는 질적변수로 YES(부도), NO(부도아님)를 통해 부도 여부를 나타내는 변수이다.
+어떤 변수가 실제로 기업의 부도에 영향을 미치며, 어떤 분류 방법이 기업 부도 여부를 가장 잘 예측하는지를 알아내는 것이 이 프로젝트의 목적이다.
 </p>
+
+<p>
+연구 목적을 달성하기 위해서 아래의 순서를 따라 데이터 분석을 진행해 나갈 것이다.
+</p>
+<ol class="org-ol">
+<li>*데이터 설정*
+</li>
+<li>*변수 선택* : Best subset, Forward selection, Backward selection, Ridge regression, Lasso 등을 이용해 각각의 가장 좋은 모델을 선택
+</li>
+<li>*최종 모델 선택* : 5개의 선택된 모델 중 Validation set approach, LOOCV, 10-fold 을 이용해 오류율을 비교하여 오류율이 가장 낮은 모델을 선택
+</li>
+<li>*분류 방법 비교* : 선택한 모델을 이용해서 Logistic, LDA, QDA, KNN 을 이용해서 어떤 방법이 가장 오류율이 적은지 분석
+</li>
+<li>*Bootstrap* : 선택한 모델에서 임의의 2개의 X 변수를 선택하여 Bootstrap을 이용해 모수 \(\alpha\) 추정, 표준편차와 비교
+</li>
+</ol>
 </div>
 
 <div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><a href="#toc-4-1"><span class="section-number-3">4.1</span></a> 로지스틱 회귀분석</h3>
+<h3 id="sec-4-1"><a href="#toc-4-1"><span class="section-number-3">4.1</span></a> 데이터 설정</h3>
 <div class="outline-text-3" id="text-4-1">
-<pre class="example">
-Call:
-glm(formula = BANKRUPTCY ~ ., family = binomial, data = data)
+<p>
+변수 선택하기에 앞서 원활한 분석을 위해서 NA 값을 지니는 행을 제거하고 분석하는데 상관이 없는 변수들을 제거해야 한다.
+먼저 NA값이 있는 행을 모두 제거하였다. 그리고 기업 형태를 나타내는 =SOCIAL<sub>CODE</sub>=와 지방 코드를 나타내는 =PROVINCE<sub>CODE</sub>= 를 사용할 변수에서 제외하였다.
+마지막으로 =AGE= 값은 상식적으로 0 이상이여야 하는데 -1인 값들이 있어서 이러한 행들을 제거하였다.
+데이터를 수정하기 전의 데이터는 34개의 변수와 2859개의 데이터가 있었는데, 수정한 후 32개의 변수와 2383개의 데이터가 남았고 이 데이터를 이용해 분석을 진행한다.
+</p>
 
-Deviance Residuals: 
-	Min       1Q   Median       3Q      Max  
--1.8990  -0.1323  -0.0600  -0.0248   3.5681  
-
-Coefficients:
-								   Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                      -1.264e+03  2.890e+02  -4.376 1.21e-05 ***
-YEAR                              6.319e-01  1.444e-01   4.375 1.22e-05 ***
-SIZEmedium                       -2.414e+00  7.689e-01  -3.139  0.00169 ** 
-SIZEsmall                        -2.757e+00  8.409e-01  -3.279  0.00104 ** 
-NUMBER_EMPLOYEES                 -1.247e-03  1.276e-03  -0.977  0.32866    
-AGE                               1.732e-02  1.215e-02   1.426  0.15394    
-SOCIAL_CODELtd                   -7.805e-01  4.657e-01  -1.676  0.09378 .  
-SOCIAL_CODEother                 -1.511e+01  1.513e+03  -0.010  0.99203    
-LINKED_GROUPyes                  -1.694e+01  9.718e+02  -0.017  0.98609    
-NUMBER_PARTNERS                  -4.220e-02  2.444e-02  -1.727  0.08421 .  
-PROVINCE_CODE                    -3.997e-02  1.472e-02  -2.715  0.00663 ** 
-CHANGES_LOCATION                  9.020e-02  1.497e-01   0.602  0.54688    
-DEBT_STRUCTURE                    3.941e-02  6.966e-02   0.566  0.57153    
-DEBT_COST                        -2.235e-01  9.339e-02  -2.393  0.01671 *  
-DEBT_PAYING_AVAILABILITY          5.957e-02  1.853e-01   0.321  0.74786    
-DEBT_RATIO                       -2.292e-05  3.244e-04  -0.071  0.94366    
-WORKING_CAPITAL                  -1.275e-01  1.914e-01  -0.666  0.50520    
-WARRANTY                         -3.573e-03  1.820e-02  -0.196  0.84436    
-OPERATING_INCOME_MARGIN          -2.993e-05  7.986e-05  -0.375  0.70783    
-RETURN_OPERATING_ASSETS           1.436e-07  2.402e-05   0.006  0.99523    
-RETURN_EQUITY                    -5.433e-06  1.073e-05  -0.506  0.61254    
-RETURN_ASSETS                    -2.628e-02  1.731e-02  -1.518  0.12890    
-STOCK_TURNOVER                    2.215e-03  1.678e-02   0.132  0.89497    
-ASSET_TURNOVER                   -5.921e-01  2.390e-01  -2.478  0.01321 *  
-RECEIVABLE_TURNOVER              -2.320e-03  3.533e-03  -0.657  0.51135    
-ASSET_ROTATION                   -8.076e-06  1.211e-04  -0.067  0.94683    
-FINANCIAL_SOLVENCY                5.609e-02  1.123e-01   0.500  0.61738    
-ACID_TEST                        -6.635e-02  1.218e-01  -0.545  0.58592    
-DELAY_ACCOUNTSyes                 8.448e-02  6.038e-01   0.140  0.88872    
-NUMBER_JUDICIAL_INCIDENCES_TOTAL  3.961e-01  5.453e-01   0.726  0.46761    
-NUMBER_JUDICIAL_INCIDENCES_YEAR   1.777e+00  8.502e-01   2.090  0.03661 *  
-SPENT_JUDICIAL_INCIDENCES_TOTAL   3.638e-07  1.588e-05   0.023  0.98173    
-SPENT_JUDICIAL_INCIDENCES_YEAR    9.992e-07  1.739e-05   0.057  0.95417    
-NUMBER_SERIOUS_INCIDENCES         5.213e-01  1.074e+00   0.485  0.62747    
-AUDITEDyes                        1.594e+00  4.935e-01   3.231  0.00123 ** 
-AUDITORS_OPINIONnegative         -1.627e+01  7.066e+03  -0.002  0.99816    
-AUDITORS_OPINIONnothing          -3.316e-01  5.900e-01  -0.562  0.57403    
-AUDITORS_OPINIONpositive         -1.177e+00  7.804e-01  -1.508  0.13164    
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-	Null deviance: 485.44  on 2384  degrees of freedom
-Residual deviance: 288.32  on 2347  degrees of freedom
-AIC: 364.32
-
-Number of Fisher Scoring iterations: 18
-</pre>
+<p>
+예외적으로 LDA, QDA 분석을 진행할 때 사용할 반응변수 =BANKRUPTCY= 를 *0(NO)* 또는 *1(YES)* 로 나타내어야 하기 때문에 이 경우에는 YES, NO 값을 1과 0으로 변환시켜주는 =convert.data()= 를 사용한다.
+</p>
 </div>
 </div><script type="text/javascript">
 org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-1' /* id */);
+</script>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><a href="#toc-4-2"><span class="section-number-3">4.2</span></a> 변수 선택</h3>
+<div class="outline-text-3" id="text-4-2">
+</div><div id="outline-container-sec-4-2-1" class="outline-4">
+<h4 id="sec-4-2-1"><a href="#toc-4-2-1"><span class="section-number-4">4.2.1</span></a> Best subset</h4>
+<div class="outline-text-4" id="text-4-2-1">
+
+<div class="figure">
+<p><img src="./plots/full.png" alt="full.png" />
+</p>
+</div>
+</div>
+</div><script type="text/javascript">
+org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-1' /* id */);
+</script>
+
+<div id="outline-container-sec-4-2-2" class="outline-4">
+<h4 id="sec-4-2-2"><a href="#toc-4-2-2"><span class="section-number-4">4.2.2</span></a> Forward</h4>
+<div class="outline-text-4" id="text-4-2-2">
+
+<div class="figure">
+<p><img src="./plots/forward.png" alt="forward.png" />
+</p>
+</div>
+</div>
+</div><script type="text/javascript">
+org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-2' /* id */);
+</script>
+
+<div id="outline-container-sec-4-2-3" class="outline-4">
+<h4 id="sec-4-2-3"><a href="#toc-4-2-3"><span class="section-number-4">4.2.3</span></a> Backward</h4>
+<div class="outline-text-4" id="text-4-2-3">
+
+<div class="figure">
+<p><img src="./plots/backward.png" alt="backward.png" />
+</p>
+</div>
+</div>
+</div><script type="text/javascript">
+org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-3' /* id */);
+</script>
+
+<div id="outline-container-sec-4-2-4" class="outline-4">
+<h4 id="sec-4-2-4"><a href="#toc-4-2-4"><span class="section-number-4">4.2.4</span></a> 결과</h4>
+<div class="outline-text-4" id="text-4-2-4">
+
+<div class="figure">
+<p><img src="./plots/variable-selection-full.png" alt="variable-selection-full.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./plots/variable-selection-fwd.png" alt="variable-selection-fwd.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./plots/variable-selection-bwd.png" alt="variable-selection-bwd.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./plots/variable-selection-ridgelasso.png" alt="variable-selection-ridgelasso.png" />
+</p>
+</div>
+
+<p>
+최종 비교
+</p>
+
+
+<div class="figure">
+<p><img src="./plots/variable-selection.png" alt="variable-selection.png" />
+</p>
+</div>
+
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Error rate</th>
+<th scope="col" class="right">C<sub>p</sub></th>
+<th scope="col" class="right">BIC</th>
+<th scope="col" class="right">Adjr<sup>2</sup></th>
+<th scope="col" class="right">Ridge</th>
+<th scope="col" class="right">Lasso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Validation set approach</td>
+<td class="right">0.05121746</td>
+<td class="right">0.05289673</td>
+<td class="right">0.05625525</td>
+<td class="right">0.05541562</td>
+<td class="right">0.05289673</td>
+</tr>
+
+<tr>
+<td class="left">LOOCV(K=200)</td>
+<td class="right">0.05282276</td>
+<td class="right">0.04977804</td>
+<td class="right">0.05533741</td>
+<td class="right">0.05776089</td>
+<td class="right">0.05010032</td>
+</tr>
+
+<tr>
+<td class="left">10-fold(K=10)</td>
+<td class="right">0.05415730</td>
+<td class="right">0.05005212</td>
+<td class="right">0.05681556</td>
+<td class="right">0.05765654</td>
+<td class="right">0.05145151</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">최소 오류율</td>
+<td class="right">0.05121746</td>
+<td class="right">0.04977804</td>
+<td class="right">0.05533741</td>
+<td class="right">0.05541562</td>
+<td class="right">0.05010032</td>
+</tr>
+</tbody>
+</table></div>
+
+<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">C<sub>p</sub></th>
+<th scope="col" class="left">BIC</th>
+<th scope="col" class="left">Adjr<sup>2</sup></th>
+<th scope="col" class="left">Ridge</th>
+<th scope="col" class="left">Lasso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">SIZE</td>
+<td class="left">SIZE</td>
+<td class="left">SIZE</td>
+<td class="left">[All]</td>
+<td class="left">YEAR</td>
+</tr>
+
+<tr>
+<td class="left">NUMBER<sub>EMPLOYEES</sub></td>
+<td class="left">DEBT<sub>COST</sub></td>
+<td class="left">NUMBER<sub>EMPLOYEES</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">SIZE</td>
+</tr>
+
+<tr>
+<td class="left">AGE</td>
+<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">AGE</td>
+<td class="left">&#xa0;</td>
+<td class="left">AGE</td>
+</tr>
+
+<tr>
+<td class="left">LINKED<sub>GROUP</sub></td>
+<td class="left">RETURN<sub>ASSETS</sub></td>
+<td class="left">LINKED<sub>GROUP</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">LINKED<sub>GROUP</sub></td>
+</tr>
+
+<tr>
+<td class="left">DEBT<sub>COST</sub></td>
+<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">NUMBER<sub>PARTNERS</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">WORKING<sub>CAPITAL</sub></td>
+</tr>
+
+<tr>
+<td class="left">WORKING<sub>CAPITAL</sub></td>
+<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">DEBT<sub>COST</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">RETURN<sub>EQUITY</sub></td>
+</tr>
+
+<tr>
+<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">AUDITED</td>
+<td class="left">WORKING<sub>CAPITAL</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">RETURN<sub>ASSETS</sub></td>
+</tr>
+
+<tr>
+<td class="left">RETURN<sub>ASSETS</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">ASSET<sub>TURNOVER</sub></td>
+</tr>
+
+<tr>
+<td class="left">ASSET<sub>TURNOVER</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">RETURN<sub>ASSETS</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">FINANCIAL<sub>SOLVENCY</sub></td>
+</tr>
+
+<tr>
+<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">ASSET<sub>TURNOVER</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+</tr>
+
+<tr>
+<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+</tr>
+
+<tr>
+<td class="left">NUMBER<sub>SERIOUS</sub><sub>INCIDENCES</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+</tr>
+
+<tr>
+<td class="left">AUDITED</td>
+<td class="left">&#xa0;</td>
+<td class="left">NUMBER<sub>SERIOUS</sub><sub>INCIDENCES</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">AUDITED</td>
+</tr>
+
+<tr>
+<td class="left">AUDITORS<sub>OPINION</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">AUDITED</td>
+<td class="left">&#xa0;</td>
+<td class="left">AUDITORS<sub>OPINION</sub></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">AUDITORS<sub>OPINION</sub></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">14</td>
+<td class="left">7</td>
+<td class="left">15</td>
+<td class="left">32</td>
+<td class="left">14</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div><script type="text/javascript">
+org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-4' /* id */);
+</script>
+
+<div id="outline-container-sec-4-2-5" class="outline-4">
+<h4 id="sec-4-2-5"><a href="#toc-4-2-5"><span class="section-number-4">4.2.5</span></a> Shrinkage Methods(Ridge, Lasso)</h4>
+<div class="outline-text-4" id="text-4-2-5">
+
+<div class="figure">
+<p><img src="./plots/ridge.png" alt="ridge.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./plots/lasso.png" alt="lasso.png" />
+</p>
+</div>
+</div>
+</div><script type="text/javascript">
+org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-5' /* id */);
+</script>
+</div><script type="text/javascript">
+org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-2' /* id */);
+</script>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><a href="#toc-4-3"><span class="section-number-3">4.3</span></a> 최종 모델 선택</h3>
+</div><script type="text/javascript">
+org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-3' /* id */);
+</script>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><a href="#toc-4-4"><span class="section-number-3">4.4</span></a> 분류 방법 비교</h3>
+</div><script type="text/javascript">
+org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-4' /* id */);
+</script>
+
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5"><a href="#toc-4-5"><span class="section-number-3">4.5</span></a> Bootstrap</h3>
+</div><script type="text/javascript">
+org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-5' /* id */);
 </script>
 </div><script type="text/javascript">
 org_blog_callback('outline_2'/* type */, 'outline-container-sec-4' /* id */);
 </script>
 </div>
 <div id="postamble" class="status">
-<p class="author">작성자 : LeeDongSoo</p>
-<p class="email">이메일 : <a href="mailto:leedongsoo@LeeDongSooui-iMac.local">leedongsoo@LeeDongSooui-iMac.local</a></p>
-<p class="date">생성일 : </p>
-<p class="datetime">수정일 : 2017-12-07 Thu 12:36</p>
-<p class="datetime">송고일 : 2017-12-07 Thu 12:36</p>
+<p class="author">작성자 : DongSoo Lee</p>
+<p class="email">이메일 : <a href="mailto:mrlee_23@naver.com">mrlee_23@naver.com</a></p>
+<p class="date">생성일 : 2017-12-07</p>
+<p class="datetime">수정일 : 2017-12-16 토 17:53</p>
+<p class="datetime">송고일 : 2017-12-16 토 17:56</p>
 </div>
 <script type="text/javascript">
 org_blog_callback('postamble'/* type */, 'postamble' /* id */);
