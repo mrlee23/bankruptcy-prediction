@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>스페인 기업 부도 분석 및 예측</title>
-<!-- 2017-12-17 일 08:54 -->
+<!-- 2017-12-17 일 09:11 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="DongSoo Lee" />
@@ -135,48 +135,6 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
-    MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
-        displayAlign: "center",
-        displayIndent: "2em",
-
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
-             }
-        }
-    });
-/*]]>*///-->
-</script>
 </head>
 <body>
 <div id="content">
@@ -218,7 +176,7 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> 개요</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-이 프로젝트는 <a href="https://github.com/amorag/Bankruptcy_2016">Bankruptcy<sub>2016</sub></a>의
+이 프로젝트는 <a href="https://github.com/amorag/Bankruptcy_2016">Bankruptcy_2016</a>의
 데이터를 이용하여 1998년부터 2003년까지 약 3000개의 기업에 대한 정보를 분석하고 부도 여부를 예측하는 것을 목표로 한다.
 </p>
 
@@ -288,25 +246,25 @@ for the JavaScript code in this tag.
 </tr>
 
 <tr>
-<td class="left">SOCIAL<sub>CODE</sub></td>
+<td class="left">SOCIAL_CODE</td>
 <td class="left">Co, Ltd, other</td>
 <td class="left">기업 형태</td>
 </tr>
 
 <tr>
-<td class="left">LINKED<sub>GROUP</sub></td>
+<td class="left">LINKED_GROUP</td>
 <td class="left">no, yes</td>
 <td class="left">그룹 여부</td>
 </tr>
 
 <tr>
-<td class="left">PROVINCE<sub>CODE</sub></td>
+<td class="left">PROVINCE_CODE</td>
 <td class="left">1..52(4,5,19,34,42,44,51 제외)</td>
 <td class="left">지방 코드</td>
 </tr>
 
 <tr>
-<td class="left">DELAY<sub>ACCOUNTS</sub></td>
+<td class="left">DELAY_ACCOUNTS</td>
 <td class="left">no, yes</td>
 <td class="left">DELAY (IN SENDING ITS ANNUAL ACCOUNTS)</td>
 </tr>
@@ -318,7 +276,7 @@ for the JavaScript code in this tag.
 </tr>
 
 <tr>
-<td class="left">AUDITORS<sub>OPINION</sub></td>
+<td class="left">AUDITORS_OPINION</td>
 <td class="left">nothing, positive, minor, negative</td>
 <td class="left">감사원 의견</td>
 </tr>
@@ -361,7 +319,7 @@ for the JavaScript code in this tag.
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>EMPLOYEES</sub></td>
+<td class="left">NUMBER_EMPLOYEES</td>
 <td class="left">0 ~ 2662</td>
 <td class="left">직원 수</td>
 </tr>
@@ -373,43 +331,43 @@ for the JavaScript code in this tag.
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>PARTNERS</sub></td>
+<td class="left">NUMBER_PARTNERS</td>
 <td class="left">0 ~ 75</td>
 <td class="left">협력 기업 수</td>
 </tr>
 
 <tr>
-<td class="left">CHANGES<sub>LOCATION</sub></td>
+<td class="left">CHANGES_LOCATION</td>
 <td class="left">0 ~ 8</td>
 <td class="left">기업 위치 변경 수</td>
 </tr>
 
 <tr>
-<td class="left">DEBT<sub>STRUCTURE</sub></td>
+<td class="left">DEBT_STRUCTURE</td>
 <td class="left">-99.07 ~ 134.48</td>
 <td class="left">부채 구조</td>
 </tr>
 
 <tr>
-<td class="left">DEBT<sub>COST</sub></td>
+<td class="left">DEBT_COST</td>
 <td class="left">-0.87 ~ 8151.25</td>
 <td class="left">부채 비용</td>
 </tr>
 
 <tr>
-<td class="left">DEBT<sub>PAYING</sub><sub>AVAILABILITY</sub></td>
+<td class="left">DEBT_PAYING_AVAILABILITY</td>
 <td class="left">-7.27 ~ 345.05</td>
 <td class="left">부채 지불 능력</td>
 </tr>
 
 <tr>
-<td class="left">DEBT<sub>RATIO</sub></td>
+<td class="left">DEBT_RATIO</td>
 <td class="left">-43094.47 ~ 17570.04</td>
 <td class="left">부채 비율</td>
 </tr>
 
 <tr>
-<td class="left">WORKING<sub>CAPITAL</sub></td>
+<td class="left">WORKING_CAPITAL</td>
 <td class="left">-14.92 ~ 24.23</td>
 <td class="left">순운전(운영)자본</td>
 </tr>
@@ -421,91 +379,91 @@ for the JavaScript code in this tag.
 </tr>
 
 <tr>
-<td class="left">OPERATING<sub>INCOME</sub><sub>MARGIN</sub></td>
+<td class="left">OPERATING_INCOME_MARGIN</td>
 <td class="left">-45180.9 ~ 8791.51</td>
 <td class="left">영업이익률</td>
 </tr>
 
 <tr>
-<td class="left">RETURN<sub>OPERATING</sub><sub>ASSETS</sub></td>
+<td class="left">RETURN_OPERATING_ASSETS</td>
 <td class="left">-68775792 ~ 2885.159</td>
 <td class="left">운용자산순환률</td>
 </tr>
 
 <tr>
-<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">RETURN_EQUITY</td>
 <td class="left">-1825426 ~ 9349.018</td>
 <td class="left">자기자본이익률</td>
 </tr>
 
 <tr>
-<td class="left">RETURN<sub>ASSETS</sub></td>
+<td class="left">RETURN_ASSETS</td>
 <td class="left">-481.07 ~ 711.22</td>
 <td class="left">총자산순이익률</td>
 </tr>
 
 <tr>
-<td class="left">STOCK<sub>TURNOVER</sub></td>
+<td class="left">STOCK_TURNOVER</td>
 <td class="left">-481.08 ~ 711.22</td>
 <td class="left">자본금회전율</td>
 </tr>
 
 <tr>
-<td class="left">ASSET<sub>TURNOVER</sub></td>
+<td class="left">ASSET_TURNOVER</td>
 <td class="left">-0.33 ~ 112.28</td>
 <td class="left">자산회전율</td>
 </tr>
 
 <tr>
-<td class="left">RECEIVABLE<sub>TURNOVER</sub></td>
+<td class="left">RECEIVABLE_TURNOVER</td>
 <td class="left">-905.96 ~ 17096.96</td>
 <td class="left">매출채권 회전율</td>
 </tr>
 
 <tr>
-<td class="left">ASSET<sub>ROTATION</sub></td>
+<td class="left">ASSET_ROTATION</td>
 <td class="left">-60947.59 ~ 90619.69</td>
 <td class="left">자본순환율</td>
 </tr>
 
 <tr>
-<td class="left">FINANCIAL<sub>SOLVENCY</sub></td>
+<td class="left">FINANCIAL_SOLVENCY</td>
 <td class="left">-343.43 ~ 5481.22</td>
 <td class="left">재무건전성</td>
 </tr>
 
 <tr>
-<td class="left">ACID<sub>TEST</sub></td>
+<td class="left">ACID_TEST</td>
 <td class="left">-315.79 ~ 5268.60</td>
 <td class="left">당좌 비율</td>
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">NUMBER_JUDICIAL_INCIDENCES_TOTAL</td>
 <td class="left">0 ~ 5</td>
 <td class="left">법적 분쟁 발생 수</td>
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">NUMBER_JUDICIAL_INCIDENCES_YEAR</td>
 <td class="left">0 ~ 1</td>
 <td class="left">최근 1년간 법적 분쟁 발생 수</td>
 </tr>
 
 <tr>
-<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">SPENT_JUDICIAL_INCIDENCES_TOTAL</td>
 <td class="left">0 ~ 448342.4</td>
 <td class="left">법적 분쟁 부담 비용</td>
 </tr>
 
 <tr>
-<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">SPENT_JUDICIAL_INCIDENCES_YEAR</td>
 <td class="left">0 ~ 445476.7</td>
 <td class="left">최근 1년간 법적 부쟁 부담 비용</td>
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>SERIOUS</sub><sub>INCIDENCES</sub></td>
+<td class="left">NUMBER_SERIOUS_INCIDENCES</td>
 <td class="left">0 ~ 1</td>
 <td class="left">위험 사고 발생 수</td>
 </tr>
@@ -536,7 +494,7 @@ for the JavaScript code in this tag.
 </li>
 <li><b>분류 방법 비교</b> : 선택한 모델을 이용해서 Logistic, LDA, QDA, KNN 을 이용해서 어떤 방법이 가장 오류율이 적은지 분석
 </li>
-<li><b>Bootstrap</b> : 선택한 모델에서 임의의 2개의 X 변수를 선택하여 Bootstrap을 이용해 모수 \(\alpha\) 추정, 표준편차와 비교
+<li><b>Bootstrap</b> : 선택한 모델에서 임의의 2개의 X 변수를 선택하여 Bootstrap을 이용해 모수 추정, 표준편차와 비교
 </li>
 </ol>
 </div>
@@ -649,9 +607,9 @@ for the JavaScript code in this tag.
 <thead>
 <tr>
 <th scope="col" class="left">Error rate</th>
-<th scope="col" class="right">C<sub>p</sub></th>
+<th scope="col" class="right">C_p</th>
 <th scope="col" class="right">BIC</th>
-<th scope="col" class="right">Adjr<sup>2</sup></th>
+<th scope="col" class="right">Adjr^2</th>
 <th scope="col" class="right">Ridge</th>
 <th scope="col" class="right">Lasso</th>
 </tr>
@@ -712,9 +670,9 @@ for the JavaScript code in this tag.
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">C<sub>p</sub></th>
+<th scope="col" class="left">C_p</th>
 <th scope="col" class="left">BIC</th>
-<th scope="col" class="left">Adjr<sup>2</sup></th>
+<th scope="col" class="left">Adjr^2</th>
 <th scope="col" class="left">Ridge</th>
 <th scope="col" class="left">Lasso</th>
 </tr>
@@ -729,113 +687,113 @@ for the JavaScript code in this tag.
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>EMPLOYEES</sub></td>
-<td class="left">DEBT<sub>COST</sub></td>
-<td class="left">NUMBER<sub>EMPLOYEES</sub></td>
+<td class="left">NUMBER_EMPLOYEES</td>
+<td class="left">DEBT_COST</td>
+<td class="left">NUMBER_EMPLOYEES</td>
 <td class="left">&#xa0;</td>
 <td class="left">SIZE</td>
 </tr>
 
 <tr>
 <td class="left">AGE</td>
-<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">RETURN_EQUITY</td>
 <td class="left">AGE</td>
 <td class="left">&#xa0;</td>
 <td class="left">AGE</td>
 </tr>
 
 <tr>
-<td class="left">LINKED<sub>GROUP</sub></td>
-<td class="left">RETURN<sub>ASSETS</sub></td>
-<td class="left">LINKED<sub>GROUP</sub></td>
+<td class="left">LINKED_GROUP</td>
+<td class="left">RETURN_ASSETS</td>
+<td class="left">LINKED_GROUP</td>
 <td class="left">&#xa0;</td>
-<td class="left">LINKED<sub>GROUP</sub></td>
+<td class="left">LINKED_GROUP</td>
 </tr>
 
 <tr>
-<td class="left">DEBT<sub>COST</sub></td>
-<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
-<td class="left">NUMBER<sub>PARTNERS</sub></td>
+<td class="left">DEBT_COST</td>
+<td class="left">NUMBER_JUDICIAL_INCIDENCES_YEAR</td>
+<td class="left">NUMBER_PARTNERS</td>
 <td class="left">&#xa0;</td>
-<td class="left">WORKING<sub>CAPITAL</sub></td>
+<td class="left">WORKING_CAPITAL</td>
 </tr>
 
 <tr>
-<td class="left">WORKING<sub>CAPITAL</sub></td>
-<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
-<td class="left">DEBT<sub>COST</sub></td>
+<td class="left">WORKING_CAPITAL</td>
+<td class="left">SPENT_JUDICIAL_INCIDENCES_TOTAL</td>
+<td class="left">DEBT_COST</td>
 <td class="left">&#xa0;</td>
-<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">RETURN_EQUITY</td>
 </tr>
 
 <tr>
-<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">RETURN_EQUITY</td>
 <td class="left">AUDITED</td>
-<td class="left">WORKING<sub>CAPITAL</sub></td>
+<td class="left">WORKING_CAPITAL</td>
 <td class="left">&#xa0;</td>
-<td class="left">RETURN<sub>ASSETS</sub></td>
+<td class="left">RETURN_ASSETS</td>
 </tr>
 
 <tr>
-<td class="left">RETURN<sub>ASSETS</sub></td>
+<td class="left">RETURN_ASSETS</td>
 <td class="left">&#xa0;</td>
-<td class="left">RETURN<sub>EQUITY</sub></td>
+<td class="left">RETURN_EQUITY</td>
 <td class="left">&#xa0;</td>
-<td class="left">ASSET<sub>TURNOVER</sub></td>
+<td class="left">ASSET_TURNOVER</td>
 </tr>
 
 <tr>
-<td class="left">ASSET<sub>TURNOVER</sub></td>
+<td class="left">ASSET_TURNOVER</td>
 <td class="left">&#xa0;</td>
-<td class="left">RETURN<sub>ASSETS</sub></td>
+<td class="left">RETURN_ASSETS</td>
 <td class="left">&#xa0;</td>
-<td class="left">FINANCIAL<sub>SOLVENCY</sub></td>
+<td class="left">FINANCIAL_SOLVENCY</td>
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">NUMBER_JUDICIAL_INCIDENCES_YEAR</td>
 <td class="left">&#xa0;</td>
-<td class="left">ASSET<sub>TURNOVER</sub></td>
+<td class="left">ASSET_TURNOVER</td>
 <td class="left">&#xa0;</td>
-<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">NUMBER_JUDICIAL_INCIDENCES_TOTAL</td>
 </tr>
 
 <tr>
-<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">SPENT_JUDICIAL_INCIDENCES_TOTAL</td>
 <td class="left">&#xa0;</td>
-<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">NUMBER_JUDICIAL_INCIDENCES_YEAR</td>
 <td class="left">&#xa0;</td>
-<td class="left">NUMBER<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>YEAR</sub></td>
+<td class="left">NUMBER_JUDICIAL_INCIDENCES_YEAR</td>
 </tr>
 
 <tr>
-<td class="left">NUMBER<sub>SERIOUS</sub><sub>INCIDENCES</sub></td>
+<td class="left">NUMBER_SERIOUS_INCIDENCES</td>
 <td class="left">&#xa0;</td>
-<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">SPENT_JUDICIAL_INCIDENCES_TOTAL</td>
 <td class="left">&#xa0;</td>
-<td class="left">SPENT<sub>JUDICIAL</sub><sub>INCIDENCES</sub><sub>TOTAL</sub></td>
+<td class="left">SPENT_JUDICIAL_INCIDENCES_TOTAL</td>
 </tr>
 
 <tr>
-<td class="left">AUDITED</td>
-<td class="left">&#xa0;</td>
-<td class="left">NUMBER<sub>SERIOUS</sub><sub>INCIDENCES</sub></td>
-<td class="left">&#xa0;</td>
-<td class="left">AUDITED</td>
-</tr>
-
-<tr>
-<td class="left">AUDITORS<sub>OPINION</sub></td>
-<td class="left">&#xa0;</td>
 <td class="left">AUDITED</td>
 <td class="left">&#xa0;</td>
-<td class="left">AUDITORS<sub>OPINION</sub></td>
+<td class="left">NUMBER_SERIOUS_INCIDENCES</td>
+<td class="left">&#xa0;</td>
+<td class="left">AUDITED</td>
+</tr>
+
+<tr>
+<td class="left">AUDITORS_OPINION</td>
+<td class="left">&#xa0;</td>
+<td class="left">AUDITED</td>
+<td class="left">&#xa0;</td>
+<td class="left">AUDITORS_OPINION</td>
 </tr>
 
 <tr>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
-<td class="left">AUDITORS<sub>OPINION</sub></td>
+<td class="left">AUDITORS_OPINION</td>
 <td class="left">&#xa0;</td>
 <td class="left">&#xa0;</td>
 </tr>
@@ -887,7 +845,7 @@ for the JavaScript code in this tag.
 <div id="postamble" class="status">
 <p class="date">Date: 2017-12-07</p>
 <p class="author">Author: DongSoo Lee</p>
-<p class="date">Created: 2017-12-17 일 08:54</p>
+<p class="date">Created: 2017-12-17 일 09:11</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
