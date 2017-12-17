@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>R을 활용한 기업 부도 분석 및 예측 보고서</title>
-<!-- 2017-12-17 일 09:34 -->
+<!-- 2017-12-17 일 14:56 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="DongSoo Lee" />
@@ -1370,7 +1370,7 @@ Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best s
 </tr>
 
 <tr>
-<td class="left">SPENT_JUDICAL_INCIDENCES_TOTAL</td>
+<td class="left">SPENT_JUDICIAL_INCIDENCES_TOTAL</td>
 <td class="left">0 ~ 448342.4</td>
 <td class="left">법적 분쟁 부담 비용</td>
 </tr>
@@ -1388,6 +1388,72 @@ Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best s
 
 <div id="outline-container-sec-4-4" class="outline-3">
 <h3 id="sec-4-4">3.4. Bootstrap</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+선택된 변수들 중 양적 변수들이 얼마나 데이터 변동성이 있는지 알아보기 위해서 Bootstrap 방법을 이용하였다.
+측정할 변수는 DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL 등이다.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 13:</span> Bootstrap 결과</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="right">DEBT_COST</th>
+<th scope="col" class="right">RETURN_EQUITY</th>
+<th scope="col" class="right">RETURN_ASSETS</th>
+<th scope="col" class="right">NUMBER_JUDICIAL_INCIDENCES_YEAR</th>
+<th scope="col" class="right">SPENT_JUDICIAL_INCIDENCES_TOTAL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">original</td>
+<td class="right">7.455509</td>
+<td class="right">-863.2539</td>
+<td class="right">2.307258</td>
+<td class="right">0.02938707</td>
+<td class="right">1705.897</td>
+</tr>
+
+<tr>
+<td class="left">bias</td>
+<td class="right">0.00183095</td>
+<td class="right">8.278297</td>
+<td class="right">0.01727528</td>
+<td class="right">7.13686e-05</td>
+<td class="right">6.585074</td>
+</tr>
+
+<tr>
+<td class="left">std error</td>
+<td class="right">3.616646</td>
+<td class="right">789.3274</td>
+<td class="right">0.5364914</td>
+<td class="right">0.003550024</td>
+<td class="right">347.0461</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+데이터 변동성이 가장 작은 변수는 original이 0.02938707, std error가 0.003550024인 NUMBER_JUDICIAL_INCIDENCES_YEAR이고, 변동성이 가장 높은 변수는 original이 -863.2539, std error가 789.3274인 RETURN_EQUITY 였다.
+</p>
+</div>
 </div>
 
 <div id="outline-container-sec-4-5" class="outline-3">
@@ -1400,7 +1466,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 13:</span> Logistic regression 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 14:</span> Logistic regression 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1432,7 +1498,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 14:</span> LDA 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 15:</span> LDA 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1464,7 +1530,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 15:</span> QDA 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 16:</span> QDA 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1496,7 +1562,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 16:</span> KNN(K=3) 예측 표</caption>
+<caption class="t-above"><span class="table-number">Table 17:</span> KNN(K=3) 예측 표</caption>
 
 <colgroup>
 <col  class="left" />
@@ -1528,7 +1594,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 17:</span> 오분류율 비교</caption>
+<caption class="t-above"><span class="table-number">Table 18:</span> 오분류율 비교</caption>
 
 <colgroup>
 <col  class="right" />
@@ -1558,7 +1624,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 </table>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 18:</span> 기업 부도 예측 성공율</caption>
+<caption class="t-above"><span class="table-number">Table 19:</span> 기업 부도 예측 성공율</caption>
 
 <colgroup>
 <col  class="right" />
@@ -1644,7 +1710,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 <div id="postamble" class="status">
 <p class="date">Date: 2017-12-16</p>
 <p class="author">Author: DongSoo Lee</p>
-<p class="date">Created: 2017-12-17 일 09:34</p>
+<p class="date">Created: 2017-12-17 일 14:56</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

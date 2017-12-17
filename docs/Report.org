@@ -293,10 +293,21 @@ Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best s
 | RETURN_EQUITY                   | -1825426 ~ 9349.018 | 자기자본이익률 |
 | RETURN_ASSETS                   | -481.07 ~ 711.22    | 총자산순이익률 |
 | NUMBER_JUDICIAL_INCIDENCES_YEAR | 0 ~ 1               | 법적 분쟁 발생 수 |
-| SPENT_JUDICAL_INCIDENCES_TOTAL  | 0 ~ 448342.4        | 법적 분쟁 부담 비용 |
+| SPENT_JUDICIAL_INCIDENCES_TOTAL | 0 ~ 448342.4        | 법적 분쟁 부담 비용 |
 | AUDITED                         | no, yes             | 감사 여부      |
 
 ** 3.4. Bootstrap
+선택된 변수들 중 양적 변수들이 얼마나 데이터 변동성이 있는지 알아보기 위해서 Bootstrap 방법을 이용하였다.
+측정할 변수는 DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL 등이다.
+
+#+CAPTION: Bootstrap 결과
+|           |  DEBT_COST | RETURN_EQUITY | RETURN_ASSETS | NUMBER_JUDICIAL_INCIDENCES_YEAR | SPENT_JUDICIAL_INCIDENCES_TOTAL |
+|-----------+------------+---------------+---------------+---------------------------------+---------------------------------|
+| original  |   7.455509 |     -863.2539 |      2.307258 |                      0.02938707 |                        1705.897 |
+| bias      | 0.00183095 |      8.278297 |    0.01727528 |                     7.13686e-05 |                        6.585074 |
+| std error |   3.616646 |      789.3274 |     0.5364914 |                     0.003550024 |                        347.0461 |
+
+데이터 변동성이 가장 작은 변수는 original이 0.02938707, std error가 0.003550024인 NUMBER_JUDICIAL_INCIDENCES_YEAR이고, 변동성이 가장 높은 변수는 original이 -863.2539, std error가 789.3274인 RETURN_EQUITY 였다.
 
 ** 3.5. 분류 방법 비교
 마지막으로 이번 단계에서는 최종 선택된 모델을 이용해 반응변수를 BANKRUPTCY 로, 독립변수를 SIZE, DEBT_COST, RETURN_EQUITY, RETURN_ASSETS, NUMBER_JUDICIAL_INCIDENCES_YEAR, SPENT_JUDICAL_INCIDENCES_TOTAL, AUDITED 로 설정하여
