@@ -362,7 +362,7 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
         top: 0;
         left: 0;
         padding: 2em 0 2em 2em;
-        /* width: 240px; */
+        width: 240px;
         /* height: 100vh; */
         font-size: 13px;
         background: #eee;
