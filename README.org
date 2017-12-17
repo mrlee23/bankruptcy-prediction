@@ -1,4 +1,5 @@
 #+INCLUDE: ./setup.org
+#+HTML_HEAD: <link href="./static/org-spec.css" rel="stylesheet" type="text/css" />
 #+TITLE: 스페인 기업 부도 분석 및 예측
 #+DATE: 2017-12-07
 #+AUTHOR: DongSoo Lee

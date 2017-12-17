@@ -1,2 +1,1 @@
 #+OPTIONS: num:nil toc:nil ^:nil TeX:nil
-#+HTML_HEAD: <link href="./static/org-spec.css" rel="stylesheet" type="text/css" />

@@ -1,4 +1,5 @@
 #+INCLUDE: ../setup.org
+#+HTML_HEAD: <link href="../static/org-spec.css" rel="stylesheet" type="text/css" />
 #+TITLE: R을 활용한 기업 부도 분석 및 예측 보고서
 #+DATE: 2017-12-16 
 #+AUTHOR: DongSoo Lee
