@@ -355,10 +355,10 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 
 [fn:1] 여기서 사용한 데이터는 https://github.com/amorag/Bankruptcy_2016 에서 확인할 수 있다.
 
-[fn:2] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R 에 있다.
+[fn:2] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R 에서 볼 수 있다.
 
-[fn:3] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/ridge.R 에 있다.
+[fn:3] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/ridge.R 에서 볼 수 있다.
 
-[fn:4] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/classification.R 에 있다.
+[fn:4] 해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/classification.R 에서 볼 수 있다.
 
  

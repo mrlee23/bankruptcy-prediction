@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>R을 활용한 기업 부도 분석 및 예측 보고서</title>
-<!-- 2017-12-17 일 08:49 -->
+<!-- 2017-12-17 일 09:10 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="DongSoo Lee" />
@@ -157,36 +157,31 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a id="toc-1" href="#sec-1">요약</a></li>
-<li><a id="toc-2" href="#sec-2">1. 서론</a></li>
-<li><a id="toc-3" href="#sec-3">2. 데이터 설명</a>
+<li><a href="#sec-1">요약</a></li>
+<li><a href="#sec-2">1. 서론</a></li>
+<li><a href="#sec-3">2. 데이터 설명</a>
 <ul>
-<li><a id="toc-3-1" href="#sec-3-1">2.1. 데이터 개요</a></li>
-<li><a id="toc-3-2" href="#sec-3-2">2.2 질적 변수</a></li>
-<li><a id="toc-3-3" href="#sec-3-3">2.3. 양적 변수</a></li>
+<li><a href="#sec-3-1">2.1. 데이터 개요</a></li>
+<li><a href="#sec-3-2">2.2 질적 변수</a></li>
+<li><a href="#sec-3-3">2.3. 양적 변수</a></li>
 </ul>
 </li>
-<li><a id="toc-4" href="#sec-4">3. 분석 과정</a>
+<li><a href="#sec-4">3. 분석 과정</a>
 <ul>
-<li><a id="toc-4-1" href="#sec-4-1">3.1. 데이터 설정</a></li>
-<li><a id="toc-4-2" href="#sec-4-2">3.2. 변수 선택</a></li>
-<li><a id="toc-4-3" href="#sec-4-3">3.3. 최종 모델 선택</a></li>
-<li><a id="toc-4-4" href="#sec-4-4">3.4. Bootstrap</a></li>
-<li><a id="toc-4-5" href="#sec-4-5">3.5. 분류 방법 비교</a></li>
+<li><a href="#sec-4-1">3.1. 데이터 설정</a></li>
+<li><a href="#sec-4-2">3.2. 변수 선택</a></li>
+<li><a href="#sec-4-3">3.3. 최종 모델 선택</a></li>
+<li><a href="#sec-4-4">3.4. Bootstrap</a></li>
+<li><a href="#sec-4-5">3.5. 분류 방법 비교</a></li>
 </ul>
 </li>
-<li><a id="toc-5" href="#sec-5">4. 결론</a></li>
-<li><a id="toc-6" href="#sec-6">5. 참고 문헌</a></li>
+<li><a href="#sec-5">4. 결론</a></li>
+<li><a href="#sec-6">5. 참고 문헌</a></li>
 </ul>
 </div>
 </div>
-<script type="text/javascript">
-org_blog_callback('toc'/* type */, 'table-of-contents' /* id */);
-</script>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_2'/* type */, 'outline-container-sec-1' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2">1. 서론</h2>
@@ -207,9 +202,7 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-1' /* id */);
 4장 결론 에서는 분석을 통해 얻은 정보로 기업의 부도에 영향을 끼치는 변수들을 설명한다.
 </p>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_2'/* type */, 'outline-container-sec-2' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3">2. 데이터 설명</h2>
@@ -224,9 +217,7 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-2' /* id */);
 누락된 데이터를 제거하고 분석을 진행한다.
 </p>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-1' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-3-2" class="outline-3">
 <h3 id="sec-3-2">2.2 질적 변수</h3>
@@ -235,7 +226,7 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-1' /* id */);
 아래의 표는 34개의 변수들 중 8개의 질적변수를 보여주고 있다.
 </p>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 1:</span> 질적 변수</caption>
 
 <colgroup>
@@ -301,11 +292,9 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-1' /* id */);
 <td class="left">부도 여부</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-2' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-3-3" class="outline-3">
 <h3 id="sec-3-3">2.3. 양적 변수</h3>
@@ -314,7 +303,7 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-2' /* id */);
 아래의 표는 34개의 변수들 중 26개의 양적변수를 보여주고 있다.
 </p>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 2:</span> 양적 변수</caption>
 
 <colgroup>
@@ -488,14 +477,10 @@ org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-2' /* id */);
 <td class="left">위험 사고 발생 수</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-3-3' /* id */);
-</script>
-</div><script type="text/javascript">
-org_blog_callback('outline_2'/* type */, 'outline-container-sec-3' /* id */);
-</script>
+</div>
+</div>
 
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4">3. 분석 과정</h2>
@@ -534,9 +519,7 @@ Validation set approach 사용시 에러를 방지할 목적으로 하나의 행
 분석 과정에서 쓰일 데이터는 수정 후의 데이터인 32개의 변수와 2382개의 데이터 행을 가진 데이터를 기준으로 사용하는 것으로 한다.
 </p>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-1' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-4-2" class="outline-3">
 <h3 id="sec-4-2">3.2. 변수 선택</h3>
@@ -582,7 +565,7 @@ Subset selection의 방법으로 변수를 선택한 결과는 아래와 같다.
 그에 따라서 결정되는 각 선택 방법별 최적의 변수들은 아래의 표와 같다.<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </p>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 3:</span> Best subset으로 선택된 변수들</caption>
 
 <colgroup>
@@ -697,9 +680,9 @@ Subset selection의 방법으로 변수를 선택한 결과는 아래와 같다.
 <td class="left">15</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 4:</span> Forward selection으로 선택된 변수들</caption>
 
 <colgroup>
@@ -814,9 +797,9 @@ Subset selection의 방법으로 변수를 선택한 결과는 아래와 같다.
 <td class="left">15</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 5:</span> Backward selection으로 선택된 변수들</caption>
 
 <colgroup>
@@ -931,15 +914,13 @@ Subset selection의 방법으로 변수를 선택한 결과는 아래와 같다.
 <td class="left">15</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
 <p>
 Best subset, Forward selection, Backward selection 세 방법 모두 C_p, BIC, AdjR^2로 선택된 변수들이 동일하였다.
 </p>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-1' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-4-2-2" class="outline-4">
 <h4 id="sec-4-2-2">Ridge regression, Lasso</h4>
@@ -975,7 +956,7 @@ Lasso의 최적의 &lambda; 값은 0.001071593 이며, 선택된 변수 개수�
 Ridge와 Lasso가 선택한 변수들은 아래의 표와 같다.(factor별 질적변수를 1개로 취급하였기 때문에 위의 그래프 상단에 나온 변수 개수와는 약간 다르다)
 </p>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 6:</span> Ridge, Lasso 변수 선택</caption>
 
 <colgroup>
@@ -1061,14 +1042,10 @@ Ridge와 Lasso가 선택한 변수들은 아래의 표와 같다.(factor별 질�
 <td class="left">13</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-2-2' /* id */);
-</script>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-2' /* id */);
-</script>
+</div>
+</div>
 
 <div id="outline-container-sec-4-3" class="outline-3">
 <h3 id="sec-4-3">3.3. 최종 모델 선택</h3>
@@ -1089,7 +1066,7 @@ Cross-validation 방법으로 Validation set approach, LOOCV, 10-fold 등 세가
 <div id="outline-container-sec-4-3-1" class="outline-4">
 <h4 id="sec-4-3-1">Subset selection 비교</h4>
 <div class="outline-text-4" id="text-4-3-1">
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 7:</span> Best subset으로 선택된 변수를 이용한 Cross-validation 오분류율</caption>
 
 <colgroup>
@@ -1131,9 +1108,9 @@ Cross-validation 방법으로 Validation set approach, LOOCV, 10-fold 등 세가
 <td class="right">0.05681556</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 8:</span> Forward selection으로 선택된 변수를 이용한 Cross-validation 오분류율</caption>
 
 <colgroup>
@@ -1175,9 +1152,9 @@ Cross-validation 방법으로 Validation set approach, LOOCV, 10-fold 등 세가
 <td class="right">0.05681556</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 9:</span> Backward selection으로 선택된 변수를 이용한 Cross-validation 오분류율</caption>
 
 <colgroup>
@@ -1219,7 +1196,7 @@ Cross-validation 방법으로 Validation set approach, LOOCV, 10-fold 등 세가
 <td class="right">0.05681556</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
 
 <div class="figure">
@@ -1233,14 +1210,12 @@ Best subset, Forward selection, Backward selection 세가지 방법이 모두 �
 따라서 Ridge, Lasso와 함께 비교할 Subset selection 방법은 Best subset으로 선택하였다.
 </p>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-3-1' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-4-3-2" class="outline-4">
 <h4 id="sec-4-3-2">Best subset, Ridge, Lasso 비교</h4>
 <div class="outline-text-4" id="text-4-3-2">
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 10:</span> Ridge regression, Lasso로 선택된 변수를 이용한 Cross-validation 오분류율</caption>
 
 <colgroup>
@@ -1276,7 +1251,7 @@ org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-3-1' /* id */)
 <td class="right">0.05145151</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
 
 <div class="figure">
@@ -1285,7 +1260,7 @@ org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-3-1' /* id */)
 <p><span class="figure-number">Figure 7:</span> Best subset, Ridge, Lasso 비교</p>
 </div>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 11:</span> 최종 비교</caption>
 
 <colgroup>
@@ -1339,14 +1314,14 @@ org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-3-1' /* id */)
 <td class="right">0.05145151</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
 <p>
 Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best subset의 BIC 방법으로 선택된 변수를 이용한 모델의 오분류율이 0.04977804로 가장 낮게 나왔다.
 따라서 최종 모델로 선택된 변수들은 아래의 표와 같다.
 </p>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 12:</span> 최종 모델</caption>
 
 <colgroup>
@@ -1406,20 +1381,14 @@ Subset selection, Ridge, Lasso의 오분류율을 최종 비교한 결과 Best s
 <td class="left">감사 여부</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_4'/* type */, 'outline-container-sec-4-3-2' /* id */);
-</script>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-3' /* id */);
-</script>
+</div>
+</div>
 
 <div id="outline-container-sec-4-4" class="outline-3">
 <h3 id="sec-4-4">3.4. Bootstrap</h3>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-4' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-4-5" class="outline-3">
 <h3 id="sec-4-5">3.5. 분류 방법 비교</h3>
@@ -1430,7 +1399,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 먼저 training 데이터와 test 데이터를 5:5의 비율로 랜덤하게 설정하여 진행하였다.<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup>
 </p>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 13:</span> Logistic regression 예측 표</caption>
 
 <colgroup>
@@ -1460,9 +1429,9 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 <td class="right">11</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 14:</span> LDA 예측 표</caption>
 
 <colgroup>
@@ -1492,9 +1461,9 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 <td class="right">7</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 15:</span> QDA 예측 표</caption>
 
 <colgroup>
@@ -1524,9 +1493,9 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 <td class="right">10</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 16:</span> KNN(K=3) 예측 표</caption>
 
 <colgroup>
@@ -1556,9 +1525,9 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 <td class="right">5</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 17:</span> 오분류율 비교</caption>
 
 <colgroup>
@@ -1586,9 +1555,9 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 <td class="right">0.02015113</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
-<div class='org-table-wrapper'><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 18:</span> 기업 부도 예측 성공율</caption>
 
 <colgroup>
@@ -1616,7 +1585,7 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 <td class="right">0.1923077</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 
 
 <p>
@@ -1626,12 +1595,8 @@ Logistic regression, LDA, QDA, KNN 분류 방법을 이용해 BANKRUPTCY를 분�
 더 나아가서 Logistic과 QDA를 비교하면 Logistic은 QDA보다 오분류율이 낮으면서 동시에 기업 부도 예측 성공율이 더 높기 때문에 Logistic, LDA, QDA, KNN 중 가장 좋은 분류 방법은 Logistic 이라는 것을 알 수 있다.
 </p>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_3'/* type */, 'outline-container-sec-4-5' /* id */);
-</script>
-</div><script type="text/javascript">
-org_blog_callback('outline_2'/* type */, 'outline-container-sec-4' /* id */);
-</script>
+</div>
+</div>
 
 <div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5">4. 결론</h2>
@@ -1642,9 +1607,7 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-4' /* id */);
 이 모델을 사용하여 분류 방법들 간의 예측율 및 오분류율을 비교한 결과 Logistic regression이 기업 부도 예측 성공률이 가장 높으면서도 동시에 비슷한 예측 성공률을 가지는 QDA 보다 오분류율이 낮음으로써 본 연구의 목적에 가장 잘 부합하는 분류 방법이라는 결론을 얻게 되었다.
 </p>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_2'/* type */, 'outline-container-sec-5' /* id */);
-</script>
+</div>
 
 <div id="outline-container-sec-6" class="outline-2">
 <h2 id="sec-6">5. 참고 문헌</h2>
@@ -1654,42 +1617,36 @@ org_blog_callback('outline_2'/* type */, 'outline-container-sec-5' /* id */);
 </li>
 </ul>
 </div>
-</div><script type="text/javascript">
-org_blog_callback('outline_2'/* type */, 'outline-container-sec-6' /* id */);
-</script>
+</div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
-여기서 사용한 데이터는 https://github.com/amorag/Bankruptcy_2016 에서 확인할 수 있다.
+여기서 사용한 데이터는 <a href="https://github.com/amorag/Bankruptcy_2016">https://github.com/amorag/Bankruptcy_2016</a> 에서 확인할 수 있다.
 </p></div>
 
 <div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
-해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R 에 있다.
+해당하는 R 코드는 <a href="https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R">https://github.com/mrlee23/bankruptcy-prediction/blob/master/variable-selection.R</a> 에서 볼 수 있다.
 </p></div>
 
 <div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
-해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/ridge.R 에 있다.
+해당하는 R 코드는 <a href="https://github.com/mrlee23/bankruptcy-prediction/blob/master/ridge.R">https://github.com/mrlee23/bankruptcy-prediction/blob/master/ridge.R</a> 에서 볼 수 있다.
 </p></div>
 
 <div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
-해당하는 R 코드는 https://github.com/mrlee23/bankruptcy-prediction/blob/master/classification.R 에 있다.
+해당하는 R 코드는 <a href="https://github.com/mrlee23/bankruptcy-prediction/blob/master/classification.R">https://github.com/mrlee23/bankruptcy-prediction/blob/master/classification.R</a> 에서 볼 수 있다.
 </p></div>
 
 
 </div>
-</div><script type="text/javascript">
-org_blog_callback('footnote'/* type */, 'footnotes' /* id */);
-</script></div>
+</div></div>
 <div id="postamble" class="status">
-<p class="author">작성자 : DongSoo Lee</p>
-<p class="email">이메일 : <a href="mailto:mrlee_23@naver.com">mrlee_23@naver.com</a></p>
-<p class="date">생성일 : 2017-12-16</p>
-<p class="datetime">수정일 : 2017-12-17 일 08:25</p>
-<p class="datetime">송고일 : 2017-12-17 일 08:49</p>
+<p class="date">Date: 2017-12-16</p>
+<p class="author">Author: DongSoo Lee</p>
+<p class="date">Created: 2017-12-17 일 09:10</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
-<script type="text/javascript">
-org_blog_callback('postamble'/* type */, 'postamble' /* id */);
-</script></body>
+</body>
 </html>
