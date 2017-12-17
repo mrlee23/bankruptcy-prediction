@@ -358,13 +358,13 @@ span.org-rainbow-delimiters-depth-4, span.org-rainbow-delimiters-depth-8 {
     }
 
     #table-of-contents {
-        position: fixed;
+        /* position: fixed; */
         top: 0;
         left: 0;
         padding: 2em 0 2em 2em;
-        width: 240px;
-        height: 100vh;
-        font-size: 11px;
+        /* width: 240px; */
+        /* height: 100vh; */
+        font-size: 13px;
         background: #eee;
         overflow: auto;
     }
