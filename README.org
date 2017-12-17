@@ -1,9 +1,10 @@
-#+OPTIONS: num:t ^:nil TeX:nil
-#+HTML_HEAD: <link href="./static/org-spec.css" rel="stylesheet" type="text/css" />
+#+INCLUDE: ./setup.org
 #+TITLE: 스페인 기업 부도 분석 및 예측
 #+DATE: 2017-12-07
 #+AUTHOR: DongSoo Lee
 #+EMAIL: mrlee_23@naver.com
+
+#+TOC: headlines 2
 
 * 개요
 이 프로젝트는 [[https://github.com/amorag/Bankruptcy_2016][Bankruptcy_2016]]의
